@@ -7,45 +7,43 @@ A reusable react site header component for edX.org
 Usage
 --------
 Install the component in your project:
+::
 
 npm i --save @edx/frontend-component-site-header
 
 
 In your code:
 
-import { SiteHeader } from "@edx/frontend-component-site-header";
+.. code-block:: jsx
+  import { SiteHeader } from "@edx/frontend-component-site-header";
 
-...
 
-render() {
-  return(
-    <SiteHeader 
-      menuItems={...}
-      desktopMenuItems={...}
-      logo={...}
-      logoDestination="..."
-      logoAltText="..."
-      secondaryMenuItems={...}
-    /> 
-  )
-}
+  render() {
+    return(
+      <SiteHeader 
+        menuItems={...}
+        desktopMenuItems={...}
+        logo={...}
+        logoDestination="..."
+        logoAltText="..."
+        secondaryMenuItems={...}
+      /> 
+    )
+  }
 
 
 Development
 -------- 
-Install
-npm install
-
-Start the example dev server
-npm start
+To run this component from the example app, clone this repo, 
+run ``npm install``, and then run ``npm start``.
 
 
 Build the Component Only
 --------
-npm run build
+``npm run build``
 
 
 Build the example app.
 --------
-npm run build-example
+``npm run build-example``
 
