@@ -7,16 +7,16 @@ A reusable react site header component for edX.org
 Usage
 --------
 Install the component in your project:
-::
 
-npm i --save @edx/frontend-component-site-header
+``npm i --save @edx/frontend-component-site-header``
 
 
 In your code:
 
-.. code-block:: jsx
+::
   import { SiteHeader } from "@edx/frontend-component-site-header";
-
+  
+  ....code...
 
   render() {
     return(
