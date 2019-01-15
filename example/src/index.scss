@@ -1,3 +1,11 @@
+@import "~@edx/edx-bootstrap/sass/edx/theme";
+@import "bootstrap/scss/bootstrap";
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+@import "~@edx/paragon/src/SearchField/SearchField";
+
+@import '../../src/scss/index.scss';
 
 .desktop {
   .main-menu-courses {
@@ -19,4 +27,3 @@
     }
   }
 }
-

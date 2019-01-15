@@ -3,9 +3,6 @@ import React from 'react';
 import { render } from "react-dom";
 import { SiteHeader } from "../../src/index.js";
 
-
-import '../../src/scss/index.scss';
-
 import './index.scss';
 
 import EdxLogo from './edx-sm.png';
