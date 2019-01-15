@@ -7,6 +7,7 @@ export default class Menu extends React.Component {
   constructor(props) {
     super(props);
 
+    this.menu = React.createRef();
     this.state = {
       expanded: false
     }
@@ -170,7 +171,7 @@ export default class Menu extends React.Component {
           }, 
           this.props.typeClassName
         )}
-        ref="menu"
+        ref={this.menu}
         onKeyDown={this.onKeyDown}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
