@@ -1,7 +1,7 @@
 {
   "name": "@edx/frontend-component-site-header",
   "version": "0.1.0",
-  "description": "A test component",
+  "description": "A reusable React site header.",
   "repository": {
     "type": "git",
     "url": "https://github.com/edx/frontend-component-site-header.git"
