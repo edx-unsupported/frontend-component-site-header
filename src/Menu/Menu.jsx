@@ -43,7 +43,7 @@ class Menu extends React.Component {
 
   onDocumentClick(e) {
     if (!this.props.closeOnDocumentClick) return;
-    console.log(this.menu)
+
     if (this.menu && (e.target === this.menu.current || this.menu.current.contains(e.target))) return;
 
     this.close();

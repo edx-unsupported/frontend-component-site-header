@@ -1,3 +1,3 @@
-import SiteHeader from './SiteHeader.jsx';
+import SiteHeader from './SiteHeader';
 
 export default SiteHeader;

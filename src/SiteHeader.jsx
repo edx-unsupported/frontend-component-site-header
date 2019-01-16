@@ -13,7 +13,7 @@ import {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import Menu, { MENU_TYPES } from './Menu/index.jsx';
+import Menu, { MENU_TYPES } from './Menu';
 
 library.add(faBars, faSearch, faChevronDown, faUserCircle);
 
@@ -218,11 +218,11 @@ class SiteHeader extends React.Component {
 }
 
 SiteHeader.propTypes = {
-  desktopMenuItems: PropTypes.oneOf([
+  desktopMenuItems: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
   ]),
-  secondaryMenuItems: PropTypes.oneOf([
+  secondaryMenuItems: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
   ]),

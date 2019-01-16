@@ -1,13 +1,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SiteHeader from '../../src/index.jsx';
+import SiteHeader from '../../src/index';
 
 import './index.scss';
 
 import EdxLogo from './edx-sm.png';
 
-import { MENU_ITEMS, SECONDARY_MENU_ITEMS } from './MenuItems.constants.jsx';
+import { MENU_ITEMS, SECONDARY_MENU_ITEMS } from './MenuItems.constants';
 
 const App = () => (
   <div>
