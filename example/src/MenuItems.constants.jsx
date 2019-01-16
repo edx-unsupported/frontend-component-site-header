@@ -3,14 +3,14 @@ import { Hyperlink } from '@edx/paragon';
 
 export const MENU_ITEMS = [
   {
-    content: "Courses",
-    name: "courses",
-    destination: "#",
+    content: 'Courses',
+    name: 'courses',
+    destination: '#',
     submenu: (
       <div className="main-menu-courses">
         <div className="d-sm-flex align-items center">
           <h2 className="mt-2 mb-4 flex-grow-1">Courses by subject</h2>
-          <div><a href="#" className="btn btn-primary">All Subjects</a></div>
+          <div><a href="/" className="btn btn-primary">All Subjects</a></div>
         </div>
         <ul className="list-unstyled mb-0">
           <li className="nav-item"><Hyperlink content="Architecture" destination="#" /></li>
@@ -48,12 +48,12 @@ export const MENU_ITEMS = [
 
         </ul>
       </div>
-    )
+    ),
   },
   {
-    content: "Programs & degrees",
-    name: "programs",
-    destination: "#",
+    content: 'Programs & degrees',
+    name: 'programs',
+    destination: '#',
     submenu: (
       <div>
         <h2 className="mt-2 mb-4">Pathways for your advancement</h2>
@@ -62,7 +62,7 @@ export const MENU_ITEMS = [
           <dd>Graduate-level, for career advancement or a degree path</dd>
 
           <dt><Hyperlink content="Professional Certificate" destination="#" /></dt>
-          <dd>From employers or universities to build today's in-demand skills</dd>
+          <dd>From employers or universities to build today&lquo;s in-demand skills</dd>
 
           <dt><Hyperlink content="Online Master's Degree" destination="#" /></dt>
           <dd>Top-ranked programs, affordable, and fully online</dd>
@@ -74,19 +74,19 @@ export const MENU_ITEMS = [
           <dd className="mb-0">Series of courses for a deep understanding of a topic</dd>
         </dl>
       </div>
-    )
+    ),
   },
   {
-    content: "Schools & partners",
-    name: "schools",
-    destination: "#"
+    content: 'Schools & partners',
+    name: 'schools',
+    destination: '#',
   },
   {
-    content: "edX for Business",
-    name: "enterprise",
-    destination: "#"
-  }
-]
+    content: 'edX for Business',
+    name: 'enterprise',
+    destination: '#',
+  },
+];
 
 
 export const SECONDARY_MENU_ITEMS = [
@@ -104,21 +104,21 @@ export const SECONDARY_MENU_ITEMS = [
   // },
   {
     content: (<span>My Account</span>),
-    triggerClassName: "btn-outline-secondary",
-    name: "account",
+    triggerClassName: 'btn-outline-secondary',
+    name: 'account',
     submenu: (
       <div>
-      <a className="btn btn-primary btn-block mt-2 mb-3" href="#">Resume my last course</a>
-      <ul className="nav flex-column">
-        <li className="nav-item"><a className="nav-link" href="#">My Dashboard</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">My Courses</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">My Programs</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">Help</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">My Profile</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">Account Settings</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">Sign Out</a></li>
-      </ul>
+        <a className="btn btn-primary btn-block mt-2 mb-3" href="/">Resume my last course</a>
+        <ul className="nav flex-column">
+          <li className="nav-item"><a className="nav-link" href="/">My Dashboard</a></li>
+          <li className="nav-item"><a className="nav-link" href="/">My Courses</a></li>
+          <li className="nav-item"><a className="nav-link" href="/">My Programs</a></li>
+          <li className="nav-item"><a className="nav-link" href="/">Help</a></li>
+          <li className="nav-item"><a className="nav-link" href="/">My Profile</a></li>
+          <li className="nav-item"><a className="nav-link" href="/">Account Settings</a></li>
+          <li className="nav-item"><a className="nav-link" href="/">Sign Out</a></li>
+        </ul>
       </div>
-    )
+    ),
   },
-]
+];

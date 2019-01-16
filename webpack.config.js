@@ -1,11 +1,11 @@
 const Merge = require('webpack-merge');
-var path = require('path');
-var commonConfig = require('./webpack-common.config.js');
+const path = require('path');
+const commonConfig = require('./webpack.common.config.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = Merge.smart(commonConfig, {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     filename: 'main.js',
     library: 'frontend-component-site-header',
