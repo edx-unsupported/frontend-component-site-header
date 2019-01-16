@@ -180,6 +180,7 @@ class Menu extends React.Component {
         onKeyDown={this.onKeyDown}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
+        role="presentation"
       >
         {
           this.props.triggerDestination ?
