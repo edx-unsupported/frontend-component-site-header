@@ -14,6 +14,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Menu, { MENU_TYPES } from './Menu';
+import Avatar from './Avatar';
 
 library.add(faBars, faSearch, faChevronDown, faUserCircle);
 
@@ -57,13 +58,15 @@ class SiteHeader extends React.Component {
                 <SearchField />
               </Menu>
 
-              <Menu
-                className="site-header-menu"
-                triggerClassName="btn"
-                triggerContent={<FontAwesomeIcon icon="user-circle" />}
-              >
-                {this.renderAccountMenuContent()}
-              </Menu>
+              {this.props.accountMenu ? (
+                <Menu
+                  className="site-header-menu"
+                  triggerClassName="btn"
+                  triggerContent={<Avatar url={this.props.accountMenu.avatar} />}
+                >
+                  {this.props.accountMenu.menuContent}
+                </Menu>
+              ) : null}
             </div>
 
           </div>
@@ -81,7 +84,7 @@ class SiteHeader extends React.Component {
       >
         <nav className="nav flex-column menus-container">
           {
-            this.props.desktopMenuItems.map((item) => {
+            this.props.menuItems.map((item) => {
               if (item.submenu) {
                 return (
                   <Menu
@@ -125,7 +128,7 @@ class SiteHeader extends React.Component {
 
               <div className="nav primary-menu-container">
                 {
-                  this.renderNav(this.props.desktopMenuItems, {
+                  this.renderNav(this.props.menuItems, {
                     menuClassName: 'primary-menu',
                     triggerClassName: 'nav-link',
                     respondToPointerEvents: true,
@@ -136,20 +139,21 @@ class SiteHeader extends React.Component {
               </div>
 
               <div className="nav align-self-end secondary-menu-container align-items-start mb-4 mt-3">
-                <form className="form-inline">
-                  <div className="input-group">
-                    <input type="text" className="form-control form-control-sm" placeholder="Search for subjects and more..." />
-                  </div>
-                </form>
-                {
-                  this.renderNav(this.props.secondaryMenuItems, {
-                    menuClassName: 'secondary-menu',
-                    triggerClassName: 'btn btn-sm ml-sm-2',
-                    respondToPointerEvents: false,
-                  }, {
-                    className: 'btn btn-sm ml-sm-2',
-                  })
-                }
+                {this.props.accountMenu ? (
+                  <Menu
+                    className="account-menu"
+                    triggerClassName="btn ml-sm-2 btn-light account-menu-trigger"
+                    triggerContent={
+                      <span className="d-flex align-items-center">
+                        <Avatar url={this.props.accountMenu.avatar} />
+                        <span className="ml-2 mr-2">{this.props.accountMenu.username}</span>
+                        <FontAwesomeIcon icon="chevron-down" />
+                      </span>
+                    }
+                  >
+                    {this.props.accountMenu.menuContent}
+                  </Menu>
+                ) : null}
               </div>
             </div>
           </div>
@@ -195,15 +199,6 @@ class SiteHeader extends React.Component {
     );
   }
 
-  renderAccountMenuContent() {
-    return (
-      <div>
-        <Hyperlink className="btn btn-primary btn-block" content="Sign In" destination="#" />
-        <Hyperlink className="btn btn-secondary btn-block" content="Register" destination="#" />
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
@@ -218,11 +213,11 @@ class SiteHeader extends React.Component {
 }
 
 SiteHeader.propTypes = {
-  desktopMenuItems: PropTypes.oneOfType([
+  menuItems: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
   ]),
-  secondaryMenuItems: PropTypes.oneOfType([
+  accountMenu: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
   ]),
@@ -232,8 +227,8 @@ SiteHeader.propTypes = {
 };
 
 SiteHeader.defaultProps = {
-  desktopMenuItems: null,
-  secondaryMenuItems: null,
+  menuItems: null,
+  accountMenu: null,
   logo: null,
   logoAltText: null,
   logoDestination: null,
