@@ -8,6 +8,13 @@ module.exports = {
     path: path.resolve('./example/dist'),
     libraryTarget: 'umd',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      react: path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+    },
+  },
   module: commonConfig.module,
   plugins: [
     new HtmlWebPackPlugin({
