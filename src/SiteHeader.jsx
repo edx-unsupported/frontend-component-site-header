@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   Hyperlink,
-  SearchField,
   ExtraSmall,
   Small,
   Medium,
@@ -15,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Menu, { MENU_TYPES } from './Menu';
 import Avatar from './Avatar';
+import { Row, Col, Container, Box } from './Layout';
 
 library.add(faBars, faSearch, faChevronDown, faUserCircle);
 
@@ -31,10 +31,9 @@ class SiteHeader extends React.Component {
   renderMobileNav() {
     return (
       <header className="site-header mobile">
-        <div className="container-fluid">
-          <div className="row flex-nowrap">
-
-            <div className="site-header-col d-flex align-items-center">
+        <Container fluid>
+          <Row flex-nowrap>
+            <Col d-flex align-items-center position-static>
               <Menu
                 className="site-header-menu"
                 {...MENU_TYPES.OverlayPanel}
@@ -43,21 +42,15 @@ class SiteHeader extends React.Component {
               >
                 {this.renderSlidingPanelMenu()}
               </Menu>
-            </div>
-
-            <div className="brand site-header-col d-flex justify-content-center align-items-center">
-              {this.renderLogo()}
-            </div>
-
-            <div className="secondary-menu-container site-header-col d-flex justify-content-end align-items-center">
-              <Menu
-                className="site-header-menu"
-                triggerClassName="btn"
-                triggerContent={<FontAwesomeIcon icon="search" />}
-              >
-                <SearchField />
-              </Menu>
-
+            </Col>
+            <Col d-flex justify-content-center align-items-center flex-shrink-0>
+              <Hyperlink
+                className="header-logo"
+                content={<img src={this.props.logo} alt={this.props.logoAltText} />}
+                destination={this.props.logoDestination}
+              />
+            </Col>
+            <Col d-flex justify-content-end align-items-center position-static>
               {this.props.accountMenu ? (
                 <Menu
                   className="site-header-menu"
@@ -67,10 +60,9 @@ class SiteHeader extends React.Component {
                   {this.props.accountMenu.menuContent}
                 </Menu>
               ) : null}
-            </div>
-
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </header>
     );
   }
@@ -82,7 +74,7 @@ class SiteHeader extends React.Component {
           'panel-submenu-open': this.state.panelSubmenuOpen,
         })}
       >
-        <nav className="nav flex-column menus-container">
+        <Box className="nav menus-container" flex-column>
           {
             this.props.menuItems.map((item) => {
               if (item.submenu) {
@@ -109,7 +101,7 @@ class SiteHeader extends React.Component {
               );
             }, this)
           }
-        </nav>
+        </Box>
       </div>
     );
   }
@@ -117,15 +109,12 @@ class SiteHeader extends React.Component {
   renderDesktopNav() {
     return (
       <header className="site-header desktop">
-        <div className="container-fluid">
-          <div className="nav-container d-flex align-items-end">
-
+        <Container fluid>
+          <Box className="nav-container" d-flex align-items-end>
             <div className="brand">
               {this.renderLogo()}
             </div>
-
-            <div className="flex-grow-1 d-flex flex-column-reverse">
-
+            <Box d-flex flex-grow-1 flex-column-reverse>
               <div className="nav primary-menu-container">
                 {
                   this.renderNav(this.props.menuItems, {
@@ -137,8 +126,7 @@ class SiteHeader extends React.Component {
                   })
                 }
               </div>
-
-              <div className="nav align-self-end secondary-menu-container align-items-start mb-4 mt-3">
+              <Box className="nav secondary-menu-container mb-4 mt-3" align-self-end align-items-start>
                 {this.props.accountMenu ? (
                   <Menu
                     className="account-menu"
@@ -154,10 +142,10 @@ class SiteHeader extends React.Component {
                     {this.props.accountMenu.menuContent}
                   </Menu>
                 ) : null}
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Container>
       </header>
     );
   }
