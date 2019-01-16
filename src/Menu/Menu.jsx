@@ -43,8 +43,9 @@ class Menu extends React.Component {
 
   onDocumentClick(e) {
     if (!this.props.closeOnDocumentClick) return;
-
-    if (this.menu && (e.target === this.menu.current || this.menu.current.contains(e.target))) return;
+    if (this.menu) {
+      if (e.target === this.menu.current || this.menu.current.contains(e.target)) return;
+    }
 
     this.close();
   }
@@ -179,6 +180,7 @@ class Menu extends React.Component {
         onKeyDown={this.onKeyDown}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
+        role="presentation"
       >
         {
           this.props.triggerDestination ?
