@@ -43,7 +43,8 @@ class Menu extends React.Component {
 
   onDocumentClick(e) {
     if (!this.props.closeOnDocumentClick) return;
-    if (this.menu && (e.target === this.menu || this.menu.contains(e.target))) return;
+    console.log(this.menu)
+    if (this.menu && (e.target === this.menu.current || this.menu.current.contains(e.target))) return;
 
     this.close();
   }
@@ -120,7 +121,7 @@ class Menu extends React.Component {
   // Internal functions
 
   getFocusableElements() {
-    return this.menu.querySelectorAll('button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])');
+    return this.menu.current.querySelectorAll('button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])');
   }
 
   open() {
