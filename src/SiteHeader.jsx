@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Menu, { MENU_TYPES } from './Menu';
 import Avatar from './Avatar';
-import { Row, Col, Container, Box } from './Layout';
+import { Row, Col, Container } from './Layout';
 
 library.add(faBars, faSearch, faChevronDown, faUserCircle);
 
@@ -32,8 +32,8 @@ class SiteHeader extends React.Component {
     return (
       <header className="site-header mobile">
         <Container fluid>
-          <Row flex-nowrap>
-            <Col d-flex align-items-center position-static>
+          <Row className="flex-nowrap">
+            <Col className="d-flex align-items-center position-static">
               <Menu
                 className="site-header-menu"
                 {...MENU_TYPES.OverlayPanel}
@@ -43,14 +43,14 @@ class SiteHeader extends React.Component {
                 {this.renderSlidingPanelMenu()}
               </Menu>
             </Col>
-            <Col d-flex justify-content-center align-items-center flex-shrink-0>
+            <Col className="d-flex justify-content-center align-items-center flex-shrink-0">
               <Hyperlink
                 className="header-logo"
                 content={<img src={this.props.logo} alt={this.props.logoAltText} />}
                 destination={this.props.logoDestination}
               />
             </Col>
-            <Col d-flex justify-content-end align-items-center position-static>
+            <Col className="d-flex justify-content-end align-items-center position-static">
               {this.props.accountMenu ? (
                 <Menu
                   className="site-header-menu"
@@ -74,7 +74,7 @@ class SiteHeader extends React.Component {
           'panel-submenu-open': this.state.panelSubmenuOpen,
         })}
       >
-        <Box className="nav menus-container" flex-column>
+        <div className="nav menus-container flex-column">
           {
             this.props.menuItems.map((item) => {
               if (item.submenu) {
@@ -101,7 +101,7 @@ class SiteHeader extends React.Component {
               );
             }, this)
           }
-        </Box>
+        </div>
       </div>
     );
   }
@@ -110,11 +110,11 @@ class SiteHeader extends React.Component {
     return (
       <header className="site-header desktop">
         <Container fluid>
-          <Box className="nav-container" d-flex align-items-end>
+          <div className="nav-container d-flex align-items-end">
             <div className="brand">
               {this.renderLogo()}
             </div>
-            <Box d-flex flex-grow-1 flex-column-reverse>
+            <div className="d-flex flex-grow-1 flex-column-reverse">
               <div className="nav primary-menu-container">
                 {
                   this.renderNav(this.props.menuItems, {
@@ -126,7 +126,7 @@ class SiteHeader extends React.Component {
                   })
                 }
               </div>
-              <Box className="nav secondary-menu-container mb-4 mt-3" align-self-end align-items-start>
+              <div className="nav secondary-menu-container mb-4 mt-3 align-self-end align-items-start">
                 {this.props.accountMenu ? (
                   <Menu
                     className="account-menu"
@@ -142,9 +142,9 @@ class SiteHeader extends React.Component {
                     {this.props.accountMenu.menuContent}
                   </Menu>
                 ) : null}
-              </Box>
-            </Box>
-          </Box>
+              </div>
+            </div>
+          </div>
         </Container>
       </header>
     );
@@ -205,10 +205,7 @@ SiteHeader.propTypes = {
     PropTypes.element,
     PropTypes.array,
   ]),
-  accountMenu: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.array,
-  ]),
+  accountMenu: PropTypes.object,
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.string,
