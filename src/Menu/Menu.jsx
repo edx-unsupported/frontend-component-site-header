@@ -165,10 +165,14 @@ class Menu extends React.Component {
     } = this.props;
 
     const triggerProps = {
-      className: classNames('menu-trigger', {
-        expanded,
-        active: expanded, // bootstrap class
-      }, triggerClassName),
+      className: classNames(
+        'menu-trigger', {
+          expanded,
+          active: expanded, // bootstrap class
+        },
+        triggerClassName,
+        trigger.props.className,
+      ),
       onClick: this.onTriggerClick,
     };
 

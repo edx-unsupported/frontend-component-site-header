@@ -56,7 +56,7 @@ class SiteHeader extends React.Component {
               {this.props.accountMenu ? (
                 <Menu
                   className="site-header-menu"
-                  trigger={<AvatarButton className="btn btn-outline-primary" url={this.props.accountMenu.avatar}>username</AvatarButton>}
+                  trigger={<button role="menu" className="btn btn-avatar"><Avatar url={this.props.accountMenu.avatar} /></button>}
                 >
                   {this.props.accountMenu.menuContent}
                 </Menu>
@@ -131,14 +131,15 @@ class SiteHeader extends React.Component {
                 {this.props.accountMenu ? (
                   <Menu
                     className="account-menu"
-                    triggerClassName="btn ml-sm-2 btn-light account-menu-trigger"
-                    triggerContent={
-                      <span className="d-flex align-items-center">
-                        <Avatar url={this.props.accountMenu.avatar} />
-                        <span className="ml-2 mr-2">{this.props.accountMenu.username}</span>
-                        <FontAwesomeIcon icon="chevron-down" />
-                      </span>
-                    }
+                    trigger={(
+                      <AvatarButton
+                        className="btn btn-light"
+                        url={this.props.accountMenu.avatar}
+                      >
+                        {this.props.accountMenu.username}
+                        <FontAwesomeIcon className="ml-2 mt-1" icon="chevron-down" />
+                      </AvatarButton>
+                    )}
                   >
                     {this.props.accountMenu.menuContent}
                   </Menu>
