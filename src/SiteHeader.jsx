@@ -112,7 +112,7 @@ class SiteHeader extends React.Component {
     return (
       <header className="site-header desktop">
         <Container fluid>
-          <div className="nav-container d-flex align-items-end">
+          <div className="nav-container d-flex align-items-center">
             <div className="brand">
               {this.renderLogo()}
             </div>
@@ -128,7 +128,7 @@ class SiteHeader extends React.Component {
                   }) : null
                 }
               </div>
-              <div className="nav secondary-menu-container mb-4 mt-3 align-self-end align-items-start">
+              <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-start">
                 {this.props.accountMenu ? (
                   <Menu
                     className="account-menu"
