@@ -205,7 +205,11 @@ SiteHeader.propTypes = {
     PropTypes.element,
     PropTypes.array,
   ]),
-  accountMenu: PropTypes.object,
+  accountMenu: PropTypes.shape({
+    menuContent: PropTypes.node,
+    avatar: PropTypes.string,
+    username: PropTypes.string,
+  }),
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.string,
