@@ -7,12 +7,12 @@ import './index.scss';
 
 import EdxLogo from './edx-sm.png';
 
-import MENU_ITEMS from './MenuItems.constants';
+// import MENU_ITEMS from './MenuItems.constants';
 
 const App = () => (
   <div>
     <SiteHeader
-      menuItems={MENU_ITEMS}
+      menuItems={null}
       logo={EdxLogo}
       logoDestination="https://edx.org"
       logoAltText="edX"

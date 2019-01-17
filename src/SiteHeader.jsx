@@ -34,14 +34,16 @@ class SiteHeader extends React.Component {
         <Container fluid>
           <Row className="flex-nowrap">
             <Col className="site-header-col d-flex align-items-center position-static">
-              <Menu
-                className="site-header-menu"
-                {...MENU_TYPES.OverlayPanel}
-                triggerClassName="btn"
-                triggerContent={<FontAwesomeIcon icon="bars" />}
-              >
-                {this.renderSlidingPanelMenu()}
-              </Menu>
+              {this.props.menuItems ? (
+                <Menu
+                  className="site-header-menu"
+                  {...MENU_TYPES.OverlayPanel}
+                  triggerClassName="btn"
+                  triggerContent={<FontAwesomeIcon icon="bars" />}
+                >
+                  {this.renderSlidingPanelMenu()}
+                </Menu>
+              ) : null}
             </Col>
             <Col className="site-header-col d-flex justify-content-center align-items-center flex-shrink-0">
               <Hyperlink
@@ -117,13 +119,13 @@ class SiteHeader extends React.Component {
             <div className="d-flex flex-grow-1 flex-column-reverse">
               <div className="nav primary-menu-container">
                 {
-                  this.renderNav(this.props.menuItems, {
+                  this.props.menuItems ? this.renderNav(this.props.menuItems, {
                     menuClassName: 'primary-menu',
                     triggerClassName: 'nav-link',
                     respondToPointerEvents: true,
                   }, {
                     className: 'nav-link',
-                  })
+                  }) : null
                 }
               </div>
               <div className="nav secondary-menu-container mb-4 mt-3 align-self-end align-items-start">
