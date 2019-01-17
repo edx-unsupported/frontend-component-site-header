@@ -33,7 +33,7 @@ class SiteHeader extends React.Component {
       <header className="site-header mobile">
         <Container fluid>
           <Row className="flex-nowrap">
-            <Col className="d-flex align-items-center position-static">
+            <Col className="site-header-col d-flex align-items-center position-static">
               <Menu
                 className="site-header-menu"
                 {...MENU_TYPES.OverlayPanel}
@@ -43,18 +43,18 @@ class SiteHeader extends React.Component {
                 {this.renderSlidingPanelMenu()}
               </Menu>
             </Col>
-            <Col className="d-flex justify-content-center align-items-center flex-shrink-0">
+            <Col className="site-header-col d-flex justify-content-center align-items-center flex-shrink-0">
               <Hyperlink
                 className="header-logo"
                 content={<img src={this.props.logo} alt={this.props.logoAltText} />}
                 destination={this.props.logoDestination}
               />
             </Col>
-            <Col className="d-flex justify-content-end align-items-center position-static">
+            <Col className="site-header-col d-flex justify-content-end align-items-center position-static">
               {this.props.accountMenu ? (
                 <Menu
                   className="site-header-menu"
-                  triggerClassName="btn"
+                  triggerClassName="btn btn-avatar"
                   triggerContent={<Avatar url={this.props.accountMenu.avatar} />}
                 >
                   {this.props.accountMenu.menuContent}
