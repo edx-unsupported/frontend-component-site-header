@@ -153,24 +153,46 @@ class Menu extends React.Component {
     }
   }
 
-  render() {
-    const triggerContent = this.state.expanded && this.props.triggerExpandedContent ?
-      this.props.triggerExpandedContent :
-      this.props.triggerContent;
+  renderTrigger() {
+    const { expanded } = this.state;
+
+    const {
+      triggerExpandedContent,
+      triggerContent,
+      triggerClassName,
+      trigger,
+      triggerDestination,
+    } = this.props;
 
     const triggerProps = {
       className: classNames('menu-trigger', {
-        expanded: this.state.expanded,
-        active: this.state.expanded, // bootstrap class
-      }, this.props.triggerClassName),
+        expanded,
+        active: expanded, // bootstrap class
+      }, triggerClassName),
       onClick: this.onTriggerClick,
     };
 
-    const hyperlinkTriggerProps = {
-      content: triggerContent,
-      destination: this.props.triggerDestination,
-    };
 
+    if (trigger) {
+      return React.cloneElement(trigger, {
+        ...triggerProps,
+      });
+    }
+
+    if (triggerDestination) {
+      return (
+        <Hyperlink
+          destination={triggerDestination}
+          content={expanded ? triggerExpandedContent : triggerContent}
+          {...triggerProps}
+        />
+      );
+    }
+
+    return <button type="button" {...triggerProps}>{triggerContent}</button>;
+  }
+
+  render() {
     return (
       <div
         className={classNames('menu', this.props.className, this.props.typeClassName, {
@@ -182,11 +204,7 @@ class Menu extends React.Component {
         onMouseLeave={this.onMouseLeave}
         role="presentation"
       >
-        {
-          this.props.triggerDestination ?
-            <Hyperlink {...hyperlinkTriggerProps} {...triggerProps} /> :
-            <button type="button" {...triggerProps}>{triggerContent}</button>
-        }
+        {this.renderTrigger()}
 
         <CSSTransition
           in={this.state.expanded}
@@ -217,6 +235,9 @@ Menu.propTypes = {
   respondToPointerEvents: PropTypes.bool,
   triggerContent: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.element,
+  ]),
+  trigger: PropTypes.oneOfType([
     PropTypes.element,
   ]),
   triggerExpandedContent: PropTypes.oneOfType([

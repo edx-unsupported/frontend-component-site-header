@@ -13,7 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Menu, { MENU_TYPES } from './Menu';
-import Avatar from './Avatar';
+import Avatar, { AvatarButton } from './Avatar';
 import { Row, Col, Container } from './Layout';
 
 library.add(faBars, faSearch, faChevronDown, faUserCircle);
@@ -56,8 +56,7 @@ class SiteHeader extends React.Component {
               {this.props.accountMenu ? (
                 <Menu
                   className="site-header-menu"
-                  triggerClassName="btn btn-avatar"
-                  triggerContent={<Avatar url={this.props.accountMenu.avatar} />}
+                  trigger={<AvatarButton className="btn btn-outline-primary" url={this.props.accountMenu.avatar}>username</AvatarButton>}
                 >
                   {this.props.accountMenu.menuContent}
                 </Menu>
