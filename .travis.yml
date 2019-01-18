@@ -1,22 +1,18 @@
 language: node_js
 node_js:
-- 8
+  - 8
 cache:
   directories:
-  - "~/.npm"
+    - "~/.npm"
 install:
-- npm install
+  - npm install
 script:
-- npm run lint
-- npm run test
-- npm run build
+  - npm run lint
+  - npm run test
+  - npm run build
 after_success:
-- npm run travis-deploy-once "npm run semantic-release"
-- npm run coveralls
+  - npm run semantic-release
+  - npm run coveralls
 env:
   global:
-  - secure: "<add key here>"
-  - secure: "<add key here>"
-deploy:
-  api_key:
-    secure: PNrtkkR6icUoOB4Uownia23EIRNptjVTxNNfBLSfzfcyNXXAkcTzSx2FauqVDmn9QYu+W4GOVHazq5QVxNjeODki8ZGwjC1zMIvtHPJFGiKDCNzVpefNQyvo8kmdhHhUynf4xoPWndQreXLgmlQsEghcqoxpElC6wAh1mz2P6ZJfKPzBBs8N6vNqn1bpa6pwy7xJBcF5vKezl8qvJLBOQn+8X+XU9ZCvt/0K2UrgpATczB88NSoOFclrjJOWG/TzG0WmBXkw85K3Pgd9wVFHmLDtaP57Ir3NfQJoGIUSX4NIGVbax92qYFa0JV74enRJqmcpX1ioTaArB4hAhCPn2nOIo9rgtW1DWFKzeTGuNQVCMYSZRNAWmUnZzu9OoIqMl06WKxGylmAuYthnhW+Uc3VQJWE++mJ+F+UTXGO2r0hh9w0WHZJmRBQLfIaPRsvliuENDfrv3Mq0z7sE9XqqbQImQr75pA0IpWU2NQNYI6GWvz3tCpJKxFqF2Rn1ncBjXKnikv8/UgD/X2fPlOK+bXFMq4bqc+OHt38nnSM7lC8sePpVaj69kXYl7KU97gOT2pddxGA2pEhQP4XdtNo4+cT2uRlwHOaU3gnR1AG6SXy9mrWYSu1Es2u7jE20FUYKyat9V7ngLbe0gx/+PJt+74E1gHqZ38cKVdcUN/THvlc=
+    - secure: PNrtkkR6icUoOB4Uownia23EIRNptjVTxNNfBLSfzfcyNXXAkcTzSx2FauqVDmn9QYu+W4GOVHazq5QVxNjeODki8ZGwjC1zMIvtHPJFGiKDCNzVpefNQyvo8kmdhHhUynf4xoPWndQreXLgmlQsEghcqoxpElC6wAh1mz2P6ZJfKPzBBs8N6vNqn1bpa6pwy7xJBcF5vKezl8qvJLBOQn+8X+XU9ZCvt/0K2UrgpATczB88NSoOFclrjJOWG/TzG0WmBXkw85K3Pgd9wVFHmLDtaP57Ir3NfQJoGIUSX4NIGVbax92qYFa0JV74enRJqmcpX1ioTaArB4hAhCPn2nOIo9rgtW1DWFKzeTGuNQVCMYSZRNAWmUnZzu9OoIqMl06WKxGylmAuYthnhW+Uc3VQJWE++mJ+F+UTXGO2r0hh9w0WHZJmRBQLfIaPRsvliuENDfrv3Mq0z7sE9XqqbQImQr75pA0IpWU2NQNYI6GWvz3tCpJKxFqF2Rn1ncBjXKnikv8/UgD/X2fPlOK+bXFMq4bqc+OHt38nnSM7lC8sePpVaj69kXYl7KU97gOT2pddxGA2pEhQP4XdtNo4+cT2uRlwHOaU3gnR1AG6SXy9mrWYSu1Es2u7jE20FUYKyat9V7ngLbe0gx/+PJt+74E1gHqZ38cKVdcUN/THvlc=
