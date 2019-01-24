@@ -7,6 +7,9 @@
     "url": "https://github.com/edx/frontend-component-site-header.git"
   },
   "main": "dist/main.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "webpack --mode production",
     "build-example": "webpack --config ./webpack.dev.config.js --mode production",
