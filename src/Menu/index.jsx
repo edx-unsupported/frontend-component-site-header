@@ -1,3 +1,3 @@
-import  { Menu, MenuTrigger, MenuContent, MENU_TYPES } from './Menu';
+import  { Menu, MenuTrigger, MenuContent } from './Menu';
 
-export  { Menu, MenuTrigger, MenuContent, MENU_TYPES };
+export  { Menu, MenuTrigger, MenuContent };

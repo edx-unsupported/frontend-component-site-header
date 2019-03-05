@@ -9,8 +9,7 @@ import {
   Large,
   ExtraLarge,
 } from '@edx/paragon';
-import { Row, Col, Container } from './Layout';
-import { Menu, MenuTrigger, MenuContent, MENU_TYPES } from './Menu';
+import { Menu, MenuTrigger, MenuContent } from './Menu';
 import Avatar, { AvatarButton } from './Avatar';
 import { LinkedLogo } from './Logo';
 
@@ -66,7 +65,7 @@ class SiteHeader extends React.Component {
 
     return (
       <header className="site-header desktop">
-        <Container fluid>
+        <div className="container-fluid">
           <div className="nav-container d-flex align-items-center">
             <LinkedLogo className="logo mr-2" url="#" src={this.props.logo} alt="logo" />
             <div className="d-flex flex-grow-1 flex-column-reverse">
@@ -112,7 +111,7 @@ class SiteHeader extends React.Component {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </header>
     );
   }

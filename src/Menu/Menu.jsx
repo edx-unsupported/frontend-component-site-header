@@ -234,4 +234,4 @@ MenuContent.defaultProps = {
 
 
 
-export { Menu, MenuTrigger, MenuContent, MENU_TYPES };
+export { Menu, MenuTrigger, MenuContent };
