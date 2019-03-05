@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import DefaultAvatar from '../assets/avatar.svg';
+import DefaultAvatar from './assets/avatar.svg';
 
 function Avatar({  size, url, alt, className }) {
   return (
