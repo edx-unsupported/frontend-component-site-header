@@ -61,7 +61,7 @@ class SiteHeader extends React.Component {
     );
 
     return (
-      <header className="site-header desktop">
+      <header className="site-header-desktop">
         <div className="container-fluid">
           <div className="nav-container position-relative d-flex align-items-center">
             <LinkedLogo className="logo mr-2" url="#" src={this.props.logo} alt="logo" />
