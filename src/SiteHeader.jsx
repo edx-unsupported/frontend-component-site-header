@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  Hyperlink,
-  ExtraSmall,
-  Small,
-  Medium,
-  Large,
-  ExtraLarge,
-} from '@edx/paragon';
+import { Hyperlink, ExtraSmall, Small, Medium, Large, ExtraLarge } from '@edx/paragon';
+
+// Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
-import Avatar, { AvatarButton } from './Avatar';
+import Avatar from './Avatar';
 import { LinkedLogo } from './Logo';
 
-
+// Assets
 import menuIcon from './assets/menu.svg';
 import userMenuIcon from './assets/avatar.svg';
 import caret from './assets/caret.svg';
+
 
 const USER_MENU_ITEMS = [
   {
@@ -40,6 +36,7 @@ const USER_MENU_ITEMS = [
     content: 'Logout',
   },
 ];
+
 
 class SiteHeader extends React.Component {
   constructor(props) {
@@ -66,7 +63,7 @@ class SiteHeader extends React.Component {
     return (
       <header className="site-header desktop">
         <div className="container-fluid">
-          <div className="nav-container d-flex align-items-center">
+          <div className="nav-container position-relative d-flex align-items-center">
             <LinkedLogo className="logo mr-2" url="#" src={this.props.logo} alt="logo" />
             <div className="d-flex flex-grow-1 flex-column-reverse">
               <ul className="nav main-nav">
