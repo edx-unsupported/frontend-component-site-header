@@ -9,15 +9,42 @@ import {
   Large,
   ExtraLarge,
 } from '@edx/paragon';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import Menu, { MENU_TYPES } from './Menu';
+import { Menu, MenuTrigger, MenuContent, MENU_TYPES } from './Menu';
 import Avatar, { AvatarButton } from './Avatar';
 import { Row, Col, Container } from './Layout';
 
-library.add(faBars, faSearch, faChevronDown, faUserCircle);
+import { LinkedLogo } from './Logo';
+import UserMenu from './UserMenu';
+import IconButton from './IconButton';
 
+
+
+import menuIcon from './assets/menu.svg';
+import userMenuIcon from './assets/avatar.svg';
+import caret from './assets/caret.svg';
+
+const USER_MENU_ITEMS = [
+  {
+    type: 'item',
+    href: '#',
+    content: 'Dashboard',
+  },
+  {
+    type: 'item',
+    href: '#',
+    content: 'Profile',
+  },
+  {
+    type: 'item',
+    href: '#',
+    content: 'Account Settings',
+  },
+  {
+    type: 'item',
+    href: '#',
+    content: 'Logout',
+  },
+];
 
 class SiteHeader extends React.Component {
   constructor(props) {
@@ -28,122 +55,67 @@ class SiteHeader extends React.Component {
     };
   }
 
-  renderMobileNav() {
-    return (
-      <header className="site-header mobile">
-        <Container fluid>
-          <Row className="flex-nowrap">
-            <Col className="site-header-col d-flex align-items-center position-static">
-              {this.props.menuItems ? (
-                <Menu
-                  className="site-header-menu"
-                  {...MENU_TYPES.OverlayPanel}
-                  triggerClassName="btn"
-                  triggerContent={<FontAwesomeIcon icon="bars" />}
-                >
-                  {this.renderSlidingPanelMenu()}
-                </Menu>
-              ) : null}
-            </Col>
-            <Col className="site-header-col d-flex justify-content-center align-items-center flex-shrink-0">
-              <Hyperlink
-                className="header-logo"
-                content={<img src={this.props.logo} alt={this.props.logoAltText} />}
-                destination={this.props.logoDestination}
-              />
-            </Col>
-            <Col className="site-header-col d-flex justify-content-end align-items-center position-static">
-              {this.props.accountMenu ? (
-                <Menu
-                  className="site-header-menu"
-                  trigger={<button role="menu" className="btn btn-avatar"><Avatar url={this.props.accountMenu.avatar} /></button>}
-                >
-                  {this.props.accountMenu.menuContent}
-                </Menu>
-              ) : null}
-            </Col>
-          </Row>
-        </Container>
-      </header>
-    );
-  }
-
-  renderSlidingPanelMenu() {
-    return (
-      <div
-        className={classNames('slide-panel-menu', {
-          'panel-submenu-open': this.state.panelSubmenuOpen,
-        })}
-      >
-        <div className="nav menus-container flex-column">
-          {
-            this.props.menuItems.map((item) => {
-              if (item.submenu) {
-                return (
-                  <Menu
-                    key={`menu-${item.name}`}
-                    className="sliding-menu"
-                    triggerClassName="nav-link"
-                    triggerContent={<span>{item.content} ›</span>}
-                    triggerDestination={item.destination}
-                    onOpen={() => { this.setState({ panelSubmenuOpen: true }); }}
-                    onClose={() => { this.setState({ panelSubmenuOpen: false }); }}
-                    closeButton={<button className="nav-link" type="button">‹ <span>Close</span></button>}
-                    transitionTimeout={400}
-                    closeOnDocumentClick={false}
-                  >
-                    {item.submenu}
-                  </Menu>
-                );
-              }
-
-              return (
-                <Hyperlink className="nav-link" key={`link-${item.name}`} {...item} />
-              );
-            }, this)
-          }
-        </div>
-      </div>
-    );
-  }
-
   renderDesktopNav() {
+    const commonMenuProps = {
+      tag: 'li',
+      className: 'nav-item',
+      respondToPointerEvents: true,
+    };
+
+    const chevronDown = (
+      <svg width="16px" height="16px" viewBox="0 0 16 16" className="ml-1 mr-n1">
+        <path d="M7,4 L7,8 L11,8 L11,10 L5,10 L5,4 L7,4 Z" fill="currentColor" transform="translate(8.000000, 7.000000) rotate(-45.000000) translate(-8.000000, -7.000000) "></path>
+      </svg>
+    );
+
     return (
       <header className="site-header desktop">
         <Container fluid>
           <div className="nav-container d-flex align-items-center">
-            <div className="brand">
-              {this.renderLogo()}
-            </div>
+            <LinkedLogo
+              className="logo mr-2"
+              url="#"
+              src={this.props.logo}
+              alt="logo"
+            />
             <div className="d-flex flex-grow-1 flex-column-reverse">
-              <div className="nav primary-menu-container">
-                {
-                  this.props.menuItems ? this.renderNav(this.props.menuItems, {
-                    menuClassName: 'primary-menu',
-                    triggerClassName: 'nav-link',
-                    respondToPointerEvents: true,
-                  }, {
-                    className: 'nav-link',
-                  }) : null
-                }
-              </div>
+              <ul className="nav main-nav">
+                <Menu {...commonMenuProps}>
+                  <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href="#">
+                    Courses {chevronDown}
+                  </MenuTrigger>
+                  <MenuContent className="pin-left pin-right shadow py-2">
+                    Courses
+                    Subjects
+                    Schools
+                    for Business
+                  </MenuContent>
+                </Menu>
+                <Menu {...commonMenuProps}>
+                  <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href="#">
+                    Programs {chevronDown}
+                  </MenuTrigger>
+                  <MenuContent className="pin-left pin-right shadow py-2">
+                    Masters Certificatss
+                  </MenuContent>
+                </Menu>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Schools & Partners</a>
+                </li>
+              </ul>
               <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-start">
-                {this.props.accountMenu ? (
-                  <Menu
-                    className="account-menu"
-                    trigger={(
-                      <AvatarButton
-                        className="btn btn-light"
-                        url={this.props.accountMenu.avatar}
-                      >
-                        {this.props.accountMenu.username}
-                        <FontAwesomeIcon className="ml-2 mt-1" icon="chevron-down" />
-                      </AvatarButton>
-                    )}
-                  >
-                    {this.props.accountMenu.menuContent}
-                  </Menu>
-                ) : null}
+                <Menu {...commonMenuProps} respondToPointerEvents={false}>
+                  <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center py-1 pl-1 pr-3">
+                    <Avatar className="mr-2" /> username {chevronDown}
+                  </MenuTrigger>
+                  <MenuContent className="dropdown-menu show dropdown-menu-right pin-right shadow py-2">
+                    {USER_MENU_ITEMS.map(({ type, href, content }, i) => (
+                      <li className={`dropdown-${type}`} key={`${type}-${i}-${content}`}>
+                        <a href={href}>{content}</a>
+                      </li>
+                    ))}
+                  </MenuContent>
+                </Menu>
               </div>
             </div>
           </div>
@@ -152,40 +124,45 @@ class SiteHeader extends React.Component {
     );
   }
 
-  renderNav(navItems, menuOptions, linkOptions) {
-    return navItems.map((item) => {
-      if (item.submenu) {
-        return (
-          <Menu
-            key={`menu-${item.name}`}
-            className={menuOptions.className}
-            triggerClassName={classNames(menuOptions.triggerClassName, item.triggerClassName)}
-            triggerContent={<span>{item.content} <FontAwesomeIcon icon="chevron-down" /></span>}
-            triggerDestination={item.destination}
-            respondToPointerEvents={menuOptions.respondToPointerEvents}
-          >
-            {item.submenu}
-          </Menu>
-        );
-      }
-
-      return (
-        <Hyperlink
-          key={`link-${item.name}`}
-          className={classNames(linkOptions.className, item.triggerClassName)}
-          {...item}
-        />
-      );
-    }, this);
-  }
-
-  renderLogo() {
+  renderMobileNav() {
     return (
-      <Hyperlink
-        className="header-logo"
-        content={<img src={this.props.logo} alt={this.props.logoAltText} />}
-        destination={this.props.logoDestination}
-      />
+      <div className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top">
+        <div className="w-100">
+          <Menu className="position-static">
+            <MenuTrigger tag="button" className="icon-button">
+              <img src={menuIcon} alt="Menu" />
+            </MenuTrigger>
+            <MenuContent tag="ul" className="nav flex-column pin-left pin-right shadow py-2">
+              <li className="nav-item">
+                <a href="#" className="nav-link">Courses</a>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="nav-link">Subjects</a>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="nav-link">Schools</a>
+              </li>
+            </MenuContent>
+          </Menu>
+        </div>
+        <div className="w-100 d-flex justify-content-center">
+          <LinkedLogo className="logo" src={this.props.logo} alt="logo" />
+        </div>
+        <div className="w-100 d-flex justify-content-end">
+          <Menu className="position-static">
+            <MenuTrigger tag="button" className="icon-button">
+              <img src={userMenuIcon} alt="User Menu" />
+            </MenuTrigger>
+            <MenuContent tag="ul" className="nav flex-column pin-left pin-right shadow py-2">
+              {USER_MENU_ITEMS.map(({ type, href, content }, i) => (
+                <li className="nav-item" key={`${type}-${i}-${content}`}>
+                  <a className="nav-link" href={href}>{content}</a>
+                </li>
+              ))}
+            </MenuContent>
+          </Menu>
+        </div>
+      </div>
     );
   }
 

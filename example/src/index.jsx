@@ -5,15 +5,15 @@ import SiteHeader from '../../src/index';
 
 import './index.scss';
 
-import EdxLogo from './edx-sm.png';
+import Logo from './assets/logo.svg';
 
-// import MENU_ITEMS from './MenuItems.constants';
+import MENU_ITEMS from './MenuItems.constants';
 
 const App = () => (
   <div>
     <SiteHeader
-      menuItems={null}
-      logo={EdxLogo}
+      menuItems={MENU_ITEMS}
+      logo={Logo}
       logoDestination="https://edx.org"
       logoAltText="edX"
       accountMenu={{

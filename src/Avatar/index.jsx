@@ -2,14 +2,22 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-function Avatar({ url, alt, className }) {
-  const theClassName = classNames('avatar', 'rounded-circle', className);
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import DefaultAvatar from '../assets/avatar.svg';
 
-  if (url) {
-    return <img className={theClassName} src={url} alt={alt} />;
-  }
+function Avatar({  size, url, alt, className }) {
+  return (
+    <span 
+    style={{
 
-  return <span className={theClassName} />;
+          height: size,
+          width: size,
+    }}
+      className={classNames("avatar d-inline-block rounded-circle", className)}>
+      <img className="w-100" src={url || DefaultAvatar} alt={alt} />
+    </span>
+  );
 }
 
 Avatar.propTypes = {
@@ -19,6 +27,7 @@ Avatar.propTypes = {
 };
 
 Avatar.defaultProps = {
+  size: '2rem',
   url: null,
   alt: null,
   className: null,
@@ -26,16 +35,31 @@ Avatar.defaultProps = {
 
 
 function AvatarButton({
-  url, alt, className, children, ...props
+ avatarOnly, url, alt, className, children, ...attributes
 }) {
+  if (avatarOnly) {
+    return (
+      <button
+        style={{
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+          appearance: 'none',
+        }} 
+        className={classNames('border-0', className)}
+        {...attributes}
+      >
+        <Avatar src={url} />
+      </button>
+    );
+  }
   return (
-    <a
+    <button
       className={classNames('btn btn-avatar', className)}
-      {...props}
+      {...attributes}
     >
-      <Avatar url={url} alt={alt} />
+      <Avatar className="mr-2" url={url} alt={alt} />
       {children}
-    </a>
+    </button>
   );
 }
 

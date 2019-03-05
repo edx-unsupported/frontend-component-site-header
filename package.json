@@ -17,6 +17,7 @@
   },
   "license": "GNU",
   "dependencies": {
+    "@edx/edx-bootstrap": "git://github.com/edx/edx-bootstrap.git#update-with-documentation-site",
     "@edx/paragon": "^3.8.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.12",
     "@fortawesome/free-solid-svg-icons": "^5.6.3",
@@ -26,7 +27,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-transition-group": "^2.5.2"
+    "react-transition-group": "^2.5.2",
+    "reactstrap": "^7.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

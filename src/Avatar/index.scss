@@ -1,9 +1,10 @@
 .avatar {
   position:relative;
-  display: inline-block;;
-  height: 2rem;
-  width: 2rem;
-  background: #eee;
+  display: inline-block;
+  line-height: 1em;
+  img {
+    vertical-align: unset;
+  }
 }
 
 .btn-avatar {

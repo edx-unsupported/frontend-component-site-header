@@ -153,85 +153,57 @@ class Menu extends React.Component {
     }
   }
 
-  renderTrigger() {
-    const { expanded } = this.state;
-
-    const {
-      triggerExpandedContent,
-      triggerContent,
-      triggerClassName,
-      trigger,
-      triggerDestination,
-    } = this.props;
-
-    const triggerProps = {
-      className: classNames(
-        'menu-trigger', {
-          expanded,
-          active: expanded, // bootstrap class
-        },
-        triggerClassName,
-        trigger.props.className,
-      ),
+  renderTrigger(node) {
+    return React.cloneElement(node, {
       onClick: this.onTriggerClick,
-    };
-
-
-    if (trigger) {
-      return React.cloneElement(trigger, {
-        ...triggerProps,
-      });
-    }
-
-    if (triggerDestination) {
-      return (
-        <Hyperlink
-          destination={triggerDestination}
-          content={expanded ? triggerExpandedContent : triggerContent}
-          {...triggerProps}
-        />
-      );
-    }
-
-    return <button type="button" {...triggerProps}>{triggerContent}</button>;
+    });
+  }
+  renderMenuContent(node) {
+    return (
+      <CSSTransition
+        in={this.state.expanded}
+        timeout={this.props.transitionTimeout}
+        classNames={this.props.transitionClassName}
+        unmountOnExit
+      >
+        {node}
+      </CSSTransition>
+    );
   }
 
   render() {
-    return (
-      <div
-        className={classNames('menu', this.props.className, this.props.typeClassName, {
-          expanded: this.state.expanded,
-        })}
-        ref={this.menu}
-        onKeyDown={this.onKeyDown}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        role="presentation"
-      >
-        {this.renderTrigger()}
-
-        <CSSTransition
-          in={this.state.expanded}
-          timeout={this.props.transitionTimeout}
-          classNames={this.props.transitionClassName}
-          unmountOnExit
-        >
-          <div className="menu-content">
-            {this.props.closeButton ? React.cloneElement(this.props.closeButton, {
-              onClick: this.onCloseClick,
-            }) : null}
-            <div className="menu-content-container">
-              {this.props.children}
-            </div>
-          </div>
-        </CSSTransition>
-      </div>
-    );
+    const trigger = React.Child
+    return React.createElement(this.props.tag, {
+      className: classNames(
+        'menu',
+        this.props.className,
+        this.props.typeClassName,
+        { expanded: this.state.expanded },
+      ),
+      ref: this.menu,
+      onKeyDown: this.onKeyDown,
+      onMouseEnter: this.onMouseEnter,
+      onMouseLeave: this.onMouseLeave,
+      role: 'presentation',
+      children: (
+        <React.Fragment>
+          {React.Children.map(this.props.children, (child) => {
+            if (child.type === MenuContent) {
+              return this.renderMenuContent(child);
+            } else if (child.type === MenuTrigger) {
+              return this.renderTrigger(child);
+            }
+            return child;
+          })}
+        </React.Fragment>
+      )
+    });
   }
 }
 
 
 Menu.propTypes = {
+  tag: PropTypes.string,
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
   closeOnDocumentClick: PropTypes.bool,
@@ -260,6 +232,26 @@ Menu.propTypes = {
   ]),
 };
 
+function MenuTrigger({ tag, className, ...props }) {
+  return React.createElement(tag, {
+    className: classNames('menu-trigger', className),
+    ...props,
+  });
+}
+MenuTrigger.defaultProps = {
+  tag: 'button',
+};
+
+function MenuContent({ tag, className, ...props}) {
+  return React.createElement(tag, {
+    className: classNames('menu-content', className),
+    ...props,
+  });
+}
+MenuContent.defaultProps = {
+  tag: 'div',
+};
+
 
 const MENU_TYPES = {
   default: {
@@ -277,6 +269,7 @@ const MENU_TYPES = {
 
 
 Menu.defaultProps = {
+  tag: 'div',
   className: null,
   closeButton: null,
   triggerDestination: null,
@@ -286,5 +279,4 @@ Menu.defaultProps = {
 };
 
 
-export default Menu;
-export { MENU_TYPES };
+export { Menu, MenuTrigger, MenuContent, MENU_TYPES };

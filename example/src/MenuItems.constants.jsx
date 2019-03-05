@@ -1,6 +1,42 @@
 import React from 'react';
 import { Hyperlink } from '@edx/paragon';
 
+export const subjects = [
+  { name: 'Architecture', id: 1000 },
+  { name: 'Art & Culture', id: 1000 },
+  { name: 'Biology & Life Sciences', id: 1000 },
+  { name: 'Business & Management', id: 1000 },
+  { name: 'Chemistry', id: 1000 },
+  { name: 'Communication', id: 1000 },
+  { name: 'Computer Science', id: 1000 },
+  { name: 'Data Analysis & Statistics', id: 1000 },
+  { name: 'Design', id: 1000 },
+  { name: 'Economics & Finance', id: 1000 },
+  { name: 'Education & Teacher Training', id: 1000 },
+  { name: 'Electronics', id: 1000 },
+  { name: 'Energy & Earth Sciences', id: 1000 },
+  { name: 'Engineering', id: 1000 },
+  { name: 'Environmental Studies', id: 1000 },
+  { name: 'Ethics', id: 1000 },
+  { name: 'Food & Nutrition', id: 1000 },
+  { name: 'Health & Safety', id: 1000 },
+  { name: 'History', id: 1000 },
+  { name: 'Humanities', id: 1000 },
+  { name: 'Language', id: 1000 },
+  { name: 'Law', id: 1000 },
+  { name: 'Literature', id: 1000 },
+  { name: 'Math', id: 1000 },
+  { name: 'Medicine', id: 1000 },
+  { name: 'Music', id: 1000 },
+  { name: 'Philanthropy', id: 1000 },
+  { name: 'Philosophy & Ethics', id: 1000 },
+  { name: 'Physics', id: 1000 },
+  { name: 'Science', id: 1000 },
+  { name: 'Social Sciences', id: 1000 },
+];
+
+
+
 const MENU_ITEMS = [
   {
     content: 'Courses',
