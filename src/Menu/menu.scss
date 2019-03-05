@@ -2,8 +2,8 @@
   position: relative;
 }
 .menu-content {
-  top: 100%;
   position: absolute;
+  top: 100%;
   z-index: 10;
   background: #fff;
   min-width: 10rem;
@@ -13,8 +13,6 @@
   &.pin-right {
     right: 0;
   }
-}
-.menu-content-container {
 }
 
 @import './overlay-menu';

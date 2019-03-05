@@ -16,36 +16,14 @@ $white: #fff;
   .nav-link {
     text-decoration: none;
   }
-  
+
 }
 .site-header {
   box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
   background: $white;
-
   .nav-link {
     text-decoration: none;
   }
-}
-
-.account-menu-trigger {
-  padding-top: .25rem;
-  padding-left: .25rem;
-  padding-bottom: .25rem;
-}
-
-
-.icon-btn {
-  // padding: 0;
-  // -webkit-appearance: none;
-  // -moz-appearance: none;
-  // appearance: none;
-  // background: transparent;
-  // padding:0;
-  // border:0;
-  // text-align: center;
-  // display: inline-block;
-  height: 3rem;
-  width: 3rem;
 }
 
 .icon-button {
@@ -59,7 +37,7 @@ $white: #fff;
   width: 3rem;
   justify-content: center;
   align-items:center;
-  &:hover, &:focus, &:active {
+  &:hover, &:focus {
     background: rgba(0,0,0,.1);
   }
 }

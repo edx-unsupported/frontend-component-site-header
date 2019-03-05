@@ -9,14 +9,10 @@ import {
   Large,
   ExtraLarge,
 } from '@edx/paragon';
+import { Row, Col, Container } from './Layout';
 import { Menu, MenuTrigger, MenuContent, MENU_TYPES } from './Menu';
 import Avatar, { AvatarButton } from './Avatar';
-import { Row, Col, Container } from './Layout';
-
 import { LinkedLogo } from './Logo';
-import UserMenu from './UserMenu';
-import IconButton from './IconButton';
-
 
 
 import menuIcon from './assets/menu.svg';
@@ -72,12 +68,7 @@ class SiteHeader extends React.Component {
       <header className="site-header desktop">
         <Container fluid>
           <div className="nav-container d-flex align-items-center">
-            <LinkedLogo
-              className="logo mr-2"
-              url="#"
-              src={this.props.logo}
-              alt="logo"
-            />
+            <LinkedLogo className="logo mr-2" url="#" src={this.props.logo} alt="logo" />
             <div className="d-flex flex-grow-1 flex-column-reverse">
               <ul className="nav main-nav">
                 <Menu {...commonMenuProps}>
@@ -103,8 +94,10 @@ class SiteHeader extends React.Component {
                   <a className="nav-link" href="#">Schools & Partners</a>
                 </li>
               </ul>
-              <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-start">
-                <Menu {...commonMenuProps} respondToPointerEvents={false}>
+              <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center">
+                <a className="mr-4" href="help">Help</a>
+                <div className="mr-4"><input placeholder="Search" type="search" className="form-control search-input" /></div>
+                <Menu>
                   <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center py-1 pl-1 pr-3">
                     <Avatar className="mr-2" /> username {chevronDown}
                   </MenuTrigger>
@@ -132,7 +125,7 @@ class SiteHeader extends React.Component {
             <MenuTrigger tag="button" className="icon-button">
               <img src={menuIcon} alt="Menu" />
             </MenuTrigger>
-            <MenuContent tag="ul" className="nav flex-column pin-left pin-right shadow py-2">
+            <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
               <li className="nav-item">
                 <a href="#" className="nav-link">Courses</a>
               </li>
@@ -151,9 +144,9 @@ class SiteHeader extends React.Component {
         <div className="w-100 d-flex justify-content-end">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button">
-              <img src={userMenuIcon} alt="User Menu" />
+              <img style={{ opacity: '0.6' }} src={userMenuIcon} alt="User Menu" />
             </MenuTrigger>
-            <MenuContent tag="ul" className="nav flex-column pin-left pin-right shadow py-2">
+            <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
               {USER_MENU_ITEMS.map(({ type, href, content }, i) => (
                 <li className="nav-item" key={`${type}-${i}-${content}`}>
                   <a className="nav-link" href={href}>{content}</a>

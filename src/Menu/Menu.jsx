@@ -22,13 +22,7 @@ class Menu extends React.Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
-
   // Lifecycle Events
-
-  componentDidMount() {
-    // document.addEventListener('click', this.onDocumentClick, true);
-  }
-
   componentWillUnmount() {
     document.removeEventListener('click', this.onDocumentClick, true);
 
@@ -38,25 +32,22 @@ class Menu extends React.Component {
     }
   }
 
-
   // Event handlers
-
   onDocumentClick(e) {
     if (!this.props.closeOnDocumentClick) return;
 
-    if (this.menu && (e.target === this.menu.current
-      || this.menu.current.contains(e.target))) return;
+    const clickIsInsideMenu = this.menu.current === e.target || this.menu.current.contains(e.target);
+    if (clickIsInsideMenu) return;
 
     this.close();
   }
 
   onTriggerClick(e) {
-    if (this.state.expanded && this.props.triggerDestination) {
-      return; // do nothing. let the browser follow the link
-    }
+    // Let the browser follow the link of the trigger if the menu
+    // is already expanded and the trigger has an href attribute
+    if (this.state.expanded && e.target.getAttribute('href')) return;
 
     e.preventDefault();
-
     this.toggle();
   }
 
@@ -127,22 +118,14 @@ class Menu extends React.Component {
 
   open() {
     if (this.props.onOpen) this.props.onOpen();
-
-    this.setState({
-      expanded: true,
-    });
-
+    this.setState({ expanded: true });
     document.addEventListener('click', this.onDocumentClick, true);
   }
 
   close() {
     if (this.props.onClose) this.props.onClose();
-
-    this.setState({
-      expanded: false,
-    });
-
-    document.addEventListener('click', this.onDocumentClick, true);
+    this.setState({ expanded: false });
+    document.removeEventListener('click', this.onDocumentClick, true);
   }
 
   toggle() {
@@ -171,32 +154,35 @@ class Menu extends React.Component {
     );
   }
 
+  getAttributes() {
+    // Any extra props are attributes for the menu
+    const attributes = {};
+    Object.keys(this.props)
+      .filter((property) => Menu.propTypes[property] === undefined)
+      .map((property) => {
+        attributes[property] = this.props[property];
+      });
+    return attributes;
+  }
+
   render() {
-    const trigger = React.Child
+    const wrappedChildren = React.Children.map(this.props.children, (child) => {
+      if (child.type === MenuTrigger) {
+        return this.renderTrigger(child);
+      }
+      return this.renderMenuContent(child);
+    });
+
     return React.createElement(this.props.tag, {
-      className: classNames(
-        'menu',
-        this.props.className,
-        this.props.typeClassName,
-        { expanded: this.state.expanded },
-      ),
+      className: classNames('menu', this.props.className, {
+        expanded: this.state.expanded,
+      }),
       ref: this.menu,
       onKeyDown: this.onKeyDown,
       onMouseEnter: this.onMouseEnter,
       onMouseLeave: this.onMouseLeave,
-      role: 'presentation',
-      children: (
-        <React.Fragment>
-          {React.Children.map(this.props.children, (child) => {
-            if (child.type === MenuContent) {
-              return this.renderMenuContent(child);
-            } else if (child.type === MenuTrigger) {
-              return this.renderTrigger(child);
-            }
-            return child;
-          })}
-        </React.Fragment>
-      )
+      children: wrappedChildren,
+      ...this.getAttributes(),
     });
   }
 }
@@ -207,30 +193,23 @@ Menu.propTypes = {
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
   closeOnDocumentClick: PropTypes.bool,
-  triggerDestination: PropTypes.string,
   respondToPointerEvents: PropTypes.bool,
-  triggerContent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
-  trigger: PropTypes.oneOfType([
-    PropTypes.element,
-  ]),
-  triggerExpandedContent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
-  triggerClassName: PropTypes.string,
   className: PropTypes.string,
   transitionTimeout: PropTypes.number,
   transitionClassName: PropTypes.string,
-  typeClassName: PropTypes.string,
-  closeButton: PropTypes.element,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
 };
+Menu.defaultProps = {
+  tag: 'div',
+  className: null,
+  onClose: null,
+  onOpen: null,
+  respondToPointerEvents: false,
+  closeOnDocumentClick: true,
+  transitionTimeout: 0,
+  transitionClassName: 'menu-content',
+};
+
 
 function MenuTrigger({ tag, className, ...props }) {
   return React.createElement(tag, {
@@ -253,30 +232,6 @@ MenuContent.defaultProps = {
 };
 
 
-const MENU_TYPES = {
-  default: {
-    typeClassName: null,
-    transitionTimeout: 0,
-    transitionClassName: 'menu-content',
-  },
-  OverlayPanel: {
-    typeClassName: 'overlay-panel-menu',
-    transitionTimeout: 400,
-    transitionClassName: 'overlay-panel',
-    closeButton: <button className="overlay-close"><span>✕</span></button>,
-  },
-};
-
-
-Menu.defaultProps = {
-  tag: 'div',
-  className: null,
-  closeButton: null,
-  triggerDestination: null,
-  respondToPointerEvents: false,
-  closeOnDocumentClick: true,
-  ...MENU_TYPES.default,
-};
 
 
 export { Menu, MenuTrigger, MenuContent, MENU_TYPES };
