@@ -1,0 +1,49 @@
+.avatar {
+  position:relative;
+  display: inline-block;;
+  height: 2rem;
+  width: 2rem;
+  background: #eee;
+}
+
+.btn-avatar {
+  display: inline-flex;
+  align-items: center;
+  
+  // Regular size
+
+  $text-height: $btn-font-size * $btn-line-height;
+  $half-padding-y: ($btn-padding-y / 2);
+  padding: $half-padding-y $btn-padding-x $half-padding-y $half-padding-y;
+  .avatar {
+    height: $text-height + $btn-padding-y;
+    width: $text-height + $btn-padding-y;
+    margin-right: $half-padding-y;
+  }
+  
+  // Small size
+  
+  &.btn-sm {
+    $text-height: $btn-font-size-sm * $btn-line-height-sm;
+    $half-padding-y: ($btn-padding-y-sm / 2);
+    padding: $half-padding-y $btn-padding-x-sm $half-padding-y $half-padding-y;
+    .avatar {
+      height: $text-height + $btn-padding-y-sm;
+      width: $text-height + $btn-padding-y-sm;
+      margin-right: $half-padding-y;
+    }
+  }
+
+  // Large size
+
+  &.btn-lg {
+    $text-height: $btn-font-size-lg * $btn-line-height-lg;
+    $half-padding-y: ($btn-padding-y-lg / 2);
+    padding: $half-padding-y $btn-padding-x-lg $half-padding-y $half-padding-y;
+    .avatar {
+      height: $text-height + $btn-padding-y-lg;
+      width: $text-height + $btn-padding-y-lg;
+      margin-right: $half-padding-y;
+    }
+  }
+}
