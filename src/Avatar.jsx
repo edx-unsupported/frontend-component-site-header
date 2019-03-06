@@ -15,7 +15,7 @@ function Avatar({
       style={{ height: size, width: size }}
       className={classNames('avatar overflow-hidden d-inline-flex rounded-circle', className)}
     >
-      <img className="d-block w-100 h-100" src={src} alt={alt} />
+      <img className="d-block w-100 h-100" src={src || DefaultAvatar} alt={alt} />
     </span>
   );
 }
@@ -28,7 +28,7 @@ Avatar.propTypes = {
 };
 
 Avatar.defaultProps = {
-  src: DefaultAvatar,
+  src: null,
   size: '2rem',
   alt: null,
   className: null,
