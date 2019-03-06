@@ -39,7 +39,7 @@ module.exports = Merge.smart(commonConfig, {
     }),
     // Copies Sass files to output directory
     new CopyWebpackPlugin([
-      { from: './*.scss', to: './' },
+      { from: './src/*.scss', to: './' },
     ]),
   ],
 });
