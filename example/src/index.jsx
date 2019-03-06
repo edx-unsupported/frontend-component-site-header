@@ -23,9 +23,15 @@ class App extends React.Component {
           logoAltText="edX"
           mainMenu={[
             {
-              type: 'item',
+              type: 'menu',
               href: '#',
               content: 'Courses',
+              submenuContent: (
+                <div>
+                  <a href="#">link 1 </a>
+                  <a href="#">link 1 </a>
+                </div>
+              )
             },
             {
               type: 'item',

@@ -183,6 +183,7 @@ class Menu extends React.Component {
       onClick: this.onTriggerClick,
     });
   }
+
   renderMenuContent(node) {
     return (
       <CSSTransition

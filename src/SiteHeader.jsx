@@ -144,11 +144,11 @@ class SiteHeader extends React.Component {
         }
 
         return (
-          <Menu key={`${type}-${content}`} tag="li" className="nav-item" respondToPointerEvents>
+          <Menu key={`${type}-${content}`} tag="li" className="nav-item">
             <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
               {content}
             </MenuTrigger>
-            <MenuContent className="pin-left pin-right shadow py-2">
+            <MenuContent className="position-static pin-left pin-right py-2">
               {submenuContent}
             </MenuContent>
           </Menu>
