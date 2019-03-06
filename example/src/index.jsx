@@ -39,7 +39,7 @@ class App extends React.Component {
             },
           ]}
           loggedIn={this.state.loggedIn}
-          username={this.state.loggedIn ? "username" : null}
+          username={this.state.loggedIn ? 'username' : null}
           avatar={this.state.loggedIn ? Logo : null}
           userMenu={[
             {
@@ -74,7 +74,7 @@ class App extends React.Component {
           ]}
         />
         <div className="py-5">
-          <button 
+          <button
             className="btn btn-primary"
             onClick={() => {
               this.setState({ loggedIn: !this.state.loggedIn });
