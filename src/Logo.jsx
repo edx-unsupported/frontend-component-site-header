@@ -8,9 +8,9 @@ function Logo({ src, alt, ...attributes }) {
   );
 }
 
-function LinkedLogo({ url, src, alt, ...attributes }) {
+function LinkedLogo({ href, src, alt, ...attributes }) {
   return (
-    <a href={url} {...attributes}>
+    <a href={href} {...attributes}>
       <img className="d-block" src={src} alt={alt} />
     </a>
   );
