@@ -103,16 +103,6 @@ class SiteHeader extends React.Component {
                 {mainNavItems}
               </ul>
               <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center">
-                {/*
-                  <div className="mr-4">
-                    <input
-                      placeholder="Search"
-                      type="search"
-                      className="form-control
-                      search-input"
-                    />
-                  </div>
-                */}
                 {this.props.loggedIn ? userMenuNav : loggedOutItems}
               </div>
             </div>

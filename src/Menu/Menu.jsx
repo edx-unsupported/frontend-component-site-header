@@ -99,7 +99,7 @@ class Menu extends React.Component {
       }
       case 'Enter': {
         // Using focusable elements instead of a ref to the trigger
-        // because Hyperlink and Button can handle refs as functional compoenents
+        // because Hyperlink and Button can handle refs as functional components
         if (document.activeElement === this.getFocusableElements()[0]) {
           e.preventDefault();
           this.toggle();
