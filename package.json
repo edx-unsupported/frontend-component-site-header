@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --display-modules",
     "build-example": "webpack --config ./webpack.dev.config.js --mode production",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
@@ -26,6 +26,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
+    "react-responsive": "^6.1.1",
     "react-transition-group": "^2.5.2"
   },
   "devDependencies": {
@@ -34,7 +35,6 @@
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
     "@edx/edx-bootstrap": "git://github.com/edx/edx-bootstrap.git#update-with-documentation-site",
-    "@edx/paragon": "^3.8.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",

@@ -31,6 +31,12 @@ module.exports = Merge.smart(commonConfig, {
       amd: 'ReactDOM',
       root: 'ReactDOM',
     },
+    'prop-types': {
+      commonjs: 'prop-types',
+      commonjs2: 'prop-types',
+      amd: 'PropTypes',
+      root: 'PropTypes',
+    },
   },
   plugins: [
     // Cleans the dist directory before each build

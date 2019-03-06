@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { ExtraSmall, Small, Medium, Large, ExtraLarge } from '@edx/paragon';
+import MediaQuery from 'react-responsive';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
@@ -206,13 +206,14 @@ class SiteHeader extends React.Component {
 
   render() {
     return (
-      <div>
-        <ExtraSmall>{this.renderMobileNav()}</ExtraSmall>
-        <Small>{this.renderMobileNav()}</Small>
-        <Medium>{this.renderDesktopNav()}</Medium>
-        <Large>{this.renderDesktopNav()}</Large>
-        <ExtraLarge>{this.renderDesktopNav()}</ExtraLarge>
-      </div>
+      <React.Fragment>
+        <MediaQuery query="(max-width: 768px)">
+          {this.renderMobileNav()}
+        </MediaQuery>
+        <MediaQuery query="(min-width: 769px)">
+          {this.renderDesktopNav()}
+        </MediaQuery>
+      </React.Fragment>
     );
   }
 }
