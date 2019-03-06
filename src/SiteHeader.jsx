@@ -59,8 +59,8 @@ class SiteHeader extends React.Component {
 
     const userMenuNav = (menuItems => (
       <Menu>
-        <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center py-1 pl-1 pr-3">
-          <Avatar src={this.props.avatar} className="mr-2" /> {this.props.username} {caret}
+        <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center pl-2 pr-3">
+          <Avatar size="1.5em" src={this.props.avatar} className="mr-2" /> {this.props.username} {caret}
         </MenuTrigger>
         <MenuContent className="dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           {menuItems.map(({ type, href, content }) => (

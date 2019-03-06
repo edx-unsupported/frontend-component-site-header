@@ -5,6 +5,7 @@ import SiteHeader from '../../src/index';
 import './index.scss';
 
 import Logo from './assets/logo.svg';
+import AvatarImage from './assets/avatar.png';
 
 class App extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class App extends React.Component {
           ]}
           loggedIn={this.state.loggedIn}
           username={this.state.loggedIn ? 'username' : null}
-          avatar={this.state.loggedIn ? Logo : null}
+          avatar={this.state.loggedIn ? AvatarImage : null}
           userMenu={[
             {
               type: 'item',
