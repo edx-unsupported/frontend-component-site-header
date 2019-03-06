@@ -1,8 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Hyperlink } from '@edx/paragon';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+
+
+function MenuTrigger({ tag, className, ...attributes }) {
+  return React.createElement(tag, {
+    className: classNames('menu-trigger', className),
+    ...attributes,
+  });
+}
+MenuTrigger.propTypes = {
+  tag: PropTypes.string,
+  className: PropTypes.string,
+};
+MenuTrigger.defaultProps = {
+  tag: 'div',
+  className: null,
+};
+
+
+function MenuContent({ tag, className, ...attributes }) {
+  return React.createElement(tag, {
+    className: classNames('menu-content', className),
+    ...attributes,
+  });
+}
+MenuContent.propTypes = {
+  tag: PropTypes.string,
+  className: PropTypes.string,
+};
+MenuContent.defaultProps = {
+  tag: 'div',
+  className: null,
+};
 
 
 class Menu extends React.Component {
@@ -22,13 +53,7 @@ class Menu extends React.Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
-
   // Lifecycle Events
-
-  componentDidMount() {
-    // document.addEventListener('click', this.onDocumentClick, true);
-  }
-
   componentWillUnmount() {
     document.removeEventListener('click', this.onDocumentClick, true);
 
@@ -38,25 +63,22 @@ class Menu extends React.Component {
     }
   }
 
-
   // Event handlers
-
   onDocumentClick(e) {
     if (!this.props.closeOnDocumentClick) return;
 
-    if (this.menu && (e.target === this.menu.current
-      || this.menu.current.contains(e.target))) return;
+    const clickIsInMenu = this.menu.current === e.target || this.menu.current.contains(e.target);
+    if (clickIsInMenu) return;
 
     this.close();
   }
 
   onTriggerClick(e) {
-    if (this.state.expanded && this.props.triggerDestination) {
-      return; // do nothing. let the browser follow the link
-    }
+    // Let the browser follow the link of the trigger if the menu
+    // is already expanded and the trigger has an href attribute
+    if (this.state.expanded && e.target.getAttribute('href')) return;
 
     e.preventDefault();
-
     this.toggle();
   }
 
@@ -77,7 +99,7 @@ class Menu extends React.Component {
       }
       case 'Enter': {
         // Using focusable elements instead of a ref to the trigger
-        // because Hyperlink and Button can handle refs as functional compoenents
+        // because Hyperlink and Button can handle refs as functional components
         if (document.activeElement === this.getFocusableElements()[0]) {
           e.preventDefault();
           this.toggle();
@@ -125,24 +147,27 @@ class Menu extends React.Component {
     return this.menu.current.querySelectorAll('button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])');
   }
 
+  getAttributesFromProps() {
+    // Any extra props are attributes for the menu
+    const attributes = {};
+    Object.keys(this.props)
+      .filter(property => Menu.propTypes[property] === undefined)
+      .forEach((property) => {
+        attributes[property] = this.props[property];
+      });
+    return attributes;
+  }
+
   open() {
     if (this.props.onOpen) this.props.onOpen();
-
-    this.setState({
-      expanded: true,
-    });
-
+    this.setState({ expanded: true });
     document.addEventListener('click', this.onDocumentClick, true);
   }
 
   close() {
     if (this.props.onClose) this.props.onClose();
-
-    this.setState({
-      expanded: false,
-    });
-
-    document.addEventListener('click', this.onDocumentClick, true);
+    this.setState({ expanded: false });
+    document.removeEventListener('click', this.onDocumentClick, true);
   }
 
   toggle() {
@@ -153,138 +178,68 @@ class Menu extends React.Component {
     }
   }
 
-  renderTrigger() {
-    const { expanded } = this.state;
-
-    const {
-      triggerExpandedContent,
-      triggerContent,
-      triggerClassName,
-      trigger,
-      triggerDestination,
-    } = this.props;
-
-    const triggerProps = {
-      className: classNames(
-        'menu-trigger', {
-          expanded,
-          active: expanded, // bootstrap class
-        },
-        triggerClassName,
-        trigger.props.className,
-      ),
+  renderTrigger(node) {
+    return React.cloneElement(node, {
       onClick: this.onTriggerClick,
-    };
+    });
+  }
 
-
-    if (trigger) {
-      return React.cloneElement(trigger, {
-        ...triggerProps,
-      });
-    }
-
-    if (triggerDestination) {
-      return (
-        <Hyperlink
-          destination={triggerDestination}
-          content={expanded ? triggerExpandedContent : triggerContent}
-          {...triggerProps}
-        />
-      );
-    }
-
-    return <button type="button" {...triggerProps}>{triggerContent}</button>;
+  renderMenuContent(node) {
+    return (
+      <CSSTransition
+        in={this.state.expanded}
+        timeout={this.props.transitionTimeout}
+        classNames={this.props.transitionClassName}
+        unmountOnExit
+      >
+        {node}
+      </CSSTransition>
+    );
   }
 
   render() {
-    return (
-      <div
-        className={classNames('menu', this.props.className, this.props.typeClassName, {
-          expanded: this.state.expanded,
-        })}
-        ref={this.menu}
-        onKeyDown={this.onKeyDown}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        role="presentation"
-      >
-        {this.renderTrigger()}
+    const wrappedChildren = React.Children.map(this.props.children, (child) => {
+      if (child.type === MenuTrigger) {
+        return this.renderTrigger(child);
+      }
+      return this.renderMenuContent(child);
+    });
 
-        <CSSTransition
-          in={this.state.expanded}
-          timeout={this.props.transitionTimeout}
-          classNames={this.props.transitionClassName}
-          unmountOnExit
-        >
-          <div className="menu-content">
-            {this.props.closeButton ? React.cloneElement(this.props.closeButton, {
-              onClick: this.onCloseClick,
-            }) : null}
-            <div className="menu-content-container">
-              {this.props.children}
-            </div>
-          </div>
-        </CSSTransition>
-      </div>
-    );
+    return React.createElement(this.props.tag, {
+      className: classNames('menu', this.props.className, {
+        expanded: this.state.expanded,
+      }),
+      ref: this.menu,
+      onKeyDown: this.onKeyDown,
+      onMouseEnter: this.onMouseEnter,
+      onMouseLeave: this.onMouseLeave,
+      ...this.getAttributesFromProps(),
+    }, wrappedChildren);
   }
 }
 
 
 Menu.propTypes = {
+  tag: PropTypes.string,
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
   closeOnDocumentClick: PropTypes.bool,
-  triggerDestination: PropTypes.string,
   respondToPointerEvents: PropTypes.bool,
-  triggerContent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
-  trigger: PropTypes.oneOfType([
-    PropTypes.element,
-  ]),
-  triggerExpandedContent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
-  triggerClassName: PropTypes.string,
   className: PropTypes.string,
   transitionTimeout: PropTypes.number,
   transitionClassName: PropTypes.string,
-  typeClassName: PropTypes.string,
-  closeButton: PropTypes.element,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
 };
-
-
-const MENU_TYPES = {
-  default: {
-    typeClassName: null,
-    transitionTimeout: 0,
-    transitionClassName: 'menu-content',
-  },
-  OverlayPanel: {
-    typeClassName: 'overlay-panel-menu',
-    transitionTimeout: 400,
-    transitionClassName: 'overlay-panel',
-    closeButton: <button className="overlay-close"><span>✕</span></button>,
-  },
-};
-
-
 Menu.defaultProps = {
+  tag: 'div',
   className: null,
-  closeButton: null,
-  triggerDestination: null,
+  onClose: null,
+  onOpen: null,
   respondToPointerEvents: false,
   closeOnDocumentClick: true,
-  ...MENU_TYPES.default,
+  transitionTimeout: 0,
+  transitionClassName: 'menu-content',
 };
 
 
-export default Menu;
-export { MENU_TYPES };
+export { Menu, MenuTrigger, MenuContent };
