@@ -28,10 +28,10 @@ class App extends React.Component {
               content: 'Courses',
               submenuContent: (
                 <div>
-                  <a href="#">link 1 </a>
-                  <a href="#">link 1 </a>
+                  <a href="#link">link 1 </a>
+                  <a href="#link2">link 2 </a>
                 </div>
-              )
+              ),
             },
             {
               type: 'item',
