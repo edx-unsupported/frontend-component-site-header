@@ -242,9 +242,9 @@ SiteHeader.propTypes = {
 };
 
 SiteHeader.defaultProps = {
-  mainMenu: null,
-  userMenu: null,
-  loggedOutItems: null,
+  mainMenu: [],
+  userMenu: [],
+  loggedOutItems: [],
   logo: null,
   logoAltText: null,
   logoDestination: null,
