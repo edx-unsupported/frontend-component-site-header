@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import DefaultAvatar from './assets/avatar.svg';
 
-function Avatar({  size, src, alt, className }) {
+function Avatar({  size, src, avatar, alt, className }) {
   return (
     <span 
       style={{ height: size, width: size }}
-      className={classNames("avatar d-inline-block rounded-circle", className)}
+      className={classNames("avatar overflow-hidden d-inline-flex rounded-circle", className)}
     >
-      <img className="w-100" src={src} alt={alt} />
+      <img className="d-block w-100 h-100" src={src} alt={alt} />
     </span>
   );
 }

@@ -139,7 +139,9 @@ class SiteHeader extends React.Component {
         <div className="w-100 d-flex justify-content-end">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button">
-              <img style={{ opacity: '0.6' }} src={userMenuIcon} alt="User Menu" />
+
+              <Avatar size="1.5rem" src={this.props.avatar} />
+              
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
               {this.props.userMenu.map(({ type, href, content }, i) => (
