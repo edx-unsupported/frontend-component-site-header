@@ -33,7 +33,11 @@ const App = () => (
       logo={Logo}
       logoDestination="https://edx.org"
       logoAltText="edX"
-      loggedIn={true}
+      loggedIn={false}
+      loggedOutItems={[
+        { type: 'item', href: '#', content: 'Login' },
+        { type: 'item', href: '#', content: 'Sign Up' },
+      ]}
       username="username"
       avatar={UserAvatar}
       userMenu={[
