@@ -35,15 +35,12 @@ module.exports = {
         ],
       },
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
         loader: require.resolve('url-loader'),
       },
       {
-        test: /\.(woff2?|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'file-loader',
-        options: {
-          publicPath: '/',
-        },
       },
       {
         test: /\.html$/,
