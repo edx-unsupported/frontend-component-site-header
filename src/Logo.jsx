@@ -8,13 +8,29 @@ function Logo({ src, alt, ...attributes }) {
   );
 }
 
-function LinkedLogo({ href, src, alt, ...attributes }) {
+Logo.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+function LinkedLogo({
+  href,
+  src,
+  alt,
+  ...attributes
+}) {
   return (
     <a href={href} {...attributes}>
       <img className="d-block" src={src} alt={alt} />
     </a>
   );
 }
+
+LinkedLogo.propTypes = {
+  href: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
 
 export { LinkedLogo };
 export default Logo;

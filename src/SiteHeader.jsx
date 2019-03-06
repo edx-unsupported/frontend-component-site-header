@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Hyperlink, ExtraSmall, Small, Medium, Large, ExtraLarge } from '@edx/paragon';
+import { ExtraSmall, Small, Medium, Large, ExtraLarge } from '@edx/paragon';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
@@ -10,27 +10,32 @@ import { LinkedLogo } from './Logo';
 
 // Assets
 import menuIcon from './assets/menu.svg';
-import userMenuIcon from './assets/avatar.svg';
-import caret from './assets/caret.svg';
+
+const caret = (
+  <svg width="16px" height="16px" viewBox="0 0 16 16" className="ml-1 mr-n1">
+    <path d="M7,4 L7,8 L11,8 L11,10 L5,10 L5,4 L7,4 Z" fill="currentColor" transform="translate(8.000000, 7.000000) rotate(-45.000000) translate(-8.000000, -7.000000) " />
+  </svg>
+);
 
 
 class SiteHeader extends React.Component {
-  constructor(props) {
+  constructor(props) { // eslint-disable-line no-useless-constructor
     super(props);
   }
 
   renderDesktopNav() {
-    const chevronDown = (
-      <svg width="16px" height="16px" viewBox="0 0 16 16" className="ml-1 mr-n1">
-        <path d="M7,4 L7,8 L11,8 L11,10 L5,10 L5,4 L7,4 Z" fill="currentColor" transform="translate(8.000000, 7.000000) rotate(-45.000000) translate(-8.000000, -7.000000) "></path>
-      </svg>
-    );
-
     const mainNavItems = ((menuItems) => {
       // Nodes are accepted as a prop
       if (!Array.isArray(menuItems)) return menuItems;
 
-      return menuItems.map(({ type, href, content, submenuContent}) => {
+      return menuItems.map((menuItem) => {
+        const {
+          type,
+          href,
+          content,
+          submenuContent,
+        } = menuItem;
+
         if (type === 'item') {
           return (
             <li key={`${type}-${content}`} className="nav-item">
@@ -38,10 +43,11 @@ class SiteHeader extends React.Component {
             </li>
           );
         }
+
         return (
           <Menu key={`${type}-${content}`} tag="li" className="nav-item" respondToPointerEvents>
             <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
-              {content} {chevronDown}
+              {content} {caret}
             </MenuTrigger>
             <MenuContent className="pin-left pin-right shadow py-2">
               {submenuContent}
@@ -51,14 +57,14 @@ class SiteHeader extends React.Component {
       });
     })(this.props.mainMenu);
 
-    const userMenuNav = ((menuItems) => (
+    const userMenuNav = (menuItems => (
       <Menu>
         <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center py-1 pl-1 pr-3">
-          <Avatar src={this.props.avatar} className="mr-2" /> {this.props.username} {chevronDown}
+          <Avatar src={this.props.avatar} className="mr-2" /> {this.props.username} {caret}
         </MenuTrigger>
         <MenuContent className="dropdown-menu show dropdown-menu-right pin-right shadow py-2">
-          {menuItems.map(({ type, href, content }, i) => (
-            <li className={`dropdown-${type}`} key={`${type}-${i}-${content}`}>
+          {menuItems.map(({ type, href, content }) => (
+            <li className={`dropdown-${type}`} key={`${type}-${content}`}>
               <a href={href}>{content}</a>
             </li>
           ))}
@@ -66,23 +72,21 @@ class SiteHeader extends React.Component {
       </Menu>
     ))(this.props.userMenu);
 
-    const loggedOutItems = ((items => {
-      return items.map(({ type, href, content }, i, arr) => (
-        <a
-          key={`${type}-${content}`}
-          className={classNames(
-            "btn mr-2",
-            {
-              "btn-outline-primary": i < arr.length - 1,
-              "btn-primary": i === arr.length - 1,
-            },
-          )}
-          href={href}
-        >
-          {content}
-        </a>
-      ));
-    }))(this.props.loggedOutItems);
+    const loggedOutItems = ((items => items.map((item, i, arr) => (
+      <a
+        key={`${item.type}-${item.content}`}
+        className={classNames(
+          'btn mr-2',
+          {
+            'btn-outline-primary': i < arr.length - 1,
+            'btn-primary': i === arr.length - 1,
+          },
+        )}
+        href={item.href}
+      >
+        {item.content}
+      </a>
+    ))))(this.props.loggedOutItems);
 
     return (
       <header className="site-header-desktop">
@@ -99,9 +103,16 @@ class SiteHeader extends React.Component {
                 {mainNavItems}
               </ul>
               <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center">
-                {/*<div className="mr-4">
-                  <input placeholder="Search" type="search" className="form-control search-input" />
-                </div>*/}
+                {/*
+                  <div className="mr-4">
+                    <input
+                      placeholder="Search"
+                      type="search"
+                      className="form-control
+                      search-input"
+                    />
+                  </div>
+                */}
                 {this.props.loggedIn ? userMenuNav : loggedOutItems}
               </div>
             </div>
@@ -116,7 +127,14 @@ class SiteHeader extends React.Component {
       // Nodes are accepted as a prop
       if (!Array.isArray(menuItems)) return menuItems;
 
-      return menuItems.map(({ type, href, content, submenuContent}) => {
+      return menuItems.map((menuItem) => {
+        const {
+          type,
+          href,
+          content,
+          submenuContent,
+        } = menuItem;
+
         if (type === 'item') {
           return (
             <li key={`${type}-${content}`} className="nav-item">
@@ -124,10 +142,11 @@ class SiteHeader extends React.Component {
             </li>
           );
         }
+
         return (
           <Menu key={`${type}-${content}`} tag="li" className="nav-item" respondToPointerEvents>
             <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
-              {content} {chevronDown}
+              {content}
             </MenuTrigger>
             <MenuContent className="pin-left pin-right shadow py-2">
               {submenuContent}
@@ -137,32 +156,28 @@ class SiteHeader extends React.Component {
       });
     })(this.props.mainMenu);
 
-    const userNavItems = ((menuItems) => {
-      return menuItems.map(({ type, href, content }, i) => (
-        <li className="nav-item" key={`${type}-${i}-${content}`}>
-          <a className="nav-link" href={href}>{content}</a>
-        </li>
-      ));
-    })(this.props.userMenu);
+    const userNavItems = (menuItems => menuItems.map(({ type, href, content }) => (
+      <li className="nav-item" key={`${type}-${content}`}>
+        <a className="nav-link" href={href}>{content}</a>
+      </li>
+    )))(this.props.userMenu);
 
-    const loggedOutItems = (items => {
-      return items.map(({ type, href, content }, i , arr) => (
-        <li className="nav-item px-3 my-2" key={`${type}-${content}`}>
-          <a
-            className={classNames(
-              "btn btn-block",
-              {
-                "btn-outline-primary": i < arr.length - 1,
-                "btn-primary": i === arr.length - 1,
-              },
-            )}
-            href={href}
-          >
-            {content}
-          </a>
-        </li>
-      ));
-    })(this.props.loggedOutItems);
+    const loggedOutItems = (items => items.map(({ type, href, content }, i, arr) => (
+      <li className="nav-item px-3 my-2" key={`${type}-${content}`}>
+        <a
+          className={classNames(
+            'btn btn-block',
+            {
+              'btn-outline-primary': i < arr.length - 1,
+              'btn-primary': i === arr.length - 1,
+            },
+          )}
+          href={href}
+        >
+          {content}
+        </a>
+      </li>
+    )))(this.props.loggedOutItems);
 
 
     return (
@@ -188,7 +203,7 @@ class SiteHeader extends React.Component {
         <div className="w-100 d-flex justify-content-end align-items-center">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button">
-              <Avatar size="1.5rem" src={this.props.avatar} />            
+              <Avatar size="1.5rem" src={this.props.avatar} />
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
               {this.props.loggedIn ? userNavItems : loggedOutItems}
@@ -217,24 +232,35 @@ SiteHeader.propTypes = {
     PropTypes.node,
     PropTypes.array,
   ]),
-  userMenu: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.oneOf(['item','menu']),
-      href: PropTypes.string,
-      content: PropTypes.string,
-    })
-  ),
+
+  userMenu: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.oneOf(['item', 'menu']),
+    href: PropTypes.string,
+    content: PropTypes.string,
+  })),
+  loggedOutItems: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.oneOf(['item', 'menu']),
+    href: PropTypes.string,
+    content: PropTypes.string,
+  })),
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.string,
+  avatar: PropTypes.string,
+  username: PropTypes.string,
+  loggedIn: PropTypes.bool,
 };
 
 SiteHeader.defaultProps = {
   mainMenu: null,
   userMenu: null,
+  loggedOutItems: null,
   logo: null,
   logoAltText: null,
   logoDestination: null,
+  avatar: null,
+  username: null,
+  loggedIn: false,
 };
 
 export default SiteHeader;

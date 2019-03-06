@@ -1,8 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Hyperlink } from '@edx/paragon';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+
+
+function MenuTrigger({ tag, className, ...attributes }) {
+  return React.createElement(tag, {
+    className: classNames('menu-trigger', className),
+    ...attributes,
+  });
+}
+MenuTrigger.propTypes = {
+  tag: PropTypes.string,
+  className: PropTypes.string,
+};
+MenuTrigger.defaultProps = {
+  tag: 'div',
+  className: null,
+};
+
+
+function MenuContent({ tag, className, ...attributes }) {
+  return React.createElement(tag, {
+    className: classNames('menu-content', className),
+    ...attributes,
+  });
+}
+MenuContent.propTypes = {
+  tag: PropTypes.string,
+  className: PropTypes.string,
+};
+MenuContent.defaultProps = {
+  tag: 'div',
+  className: null,
+};
 
 
 class Menu extends React.Component {
@@ -36,8 +67,8 @@ class Menu extends React.Component {
   onDocumentClick(e) {
     if (!this.props.closeOnDocumentClick) return;
 
-    const clickIsInsideMenu = this.menu.current === e.target || this.menu.current.contains(e.target);
-    if (clickIsInsideMenu) return;
+    const clickIsInMenu = this.menu.current === e.target || this.menu.current.contains(e.target);
+    if (clickIsInMenu) return;
 
     this.close();
   }
@@ -116,6 +147,17 @@ class Menu extends React.Component {
     return this.menu.current.querySelectorAll('button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])');
   }
 
+  getAttributesFromProps() {
+    // Any extra props are attributes for the menu
+    const attributes = {};
+    Object.keys(this.props)
+      .filter(property => Menu.propTypes[property] === undefined)
+      .forEach((property) => {
+        attributes[property] = this.props[property];
+      });
+    return attributes;
+  }
+
   open() {
     if (this.props.onOpen) this.props.onOpen();
     this.setState({ expanded: true });
@@ -154,17 +196,6 @@ class Menu extends React.Component {
     );
   }
 
-  getAttributes() {
-    // Any extra props are attributes for the menu
-    const attributes = {};
-    Object.keys(this.props)
-      .filter((property) => Menu.propTypes[property] === undefined)
-      .map((property) => {
-        attributes[property] = this.props[property];
-      });
-    return attributes;
-  }
-
   render() {
     const wrappedChildren = React.Children.map(this.props.children, (child) => {
       if (child.type === MenuTrigger) {
@@ -181,9 +212,8 @@ class Menu extends React.Component {
       onKeyDown: this.onKeyDown,
       onMouseEnter: this.onMouseEnter,
       onMouseLeave: this.onMouseLeave,
-      children: wrappedChildren,
-      ...this.getAttributes(),
-    });
+      ...this.getAttributesFromProps(),
+    }, wrappedChildren);
   }
 }
 
@@ -209,29 +239,6 @@ Menu.defaultProps = {
   transitionTimeout: 0,
   transitionClassName: 'menu-content',
 };
-
-
-function MenuTrigger({ tag, className, ...props }) {
-  return React.createElement(tag, {
-    className: classNames('menu-trigger', className),
-    ...props,
-  });
-}
-MenuTrigger.defaultProps = {
-  tag: 'button',
-};
-
-function MenuContent({ tag, className, ...props}) {
-  return React.createElement(tag, {
-    className: classNames('menu-content', className),
-    ...props,
-  });
-}
-MenuContent.defaultProps = {
-  tag: 'div',
-};
-
-
 
 
 export { Menu, MenuTrigger, MenuContent };

@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Hyperlink } from '@edx/paragon';
 import SiteHeader from '../../src/index';
 
 import './index.scss';
 
 import Logo from './assets/logo.svg';
-import UserAvatar from './assets/logo.svg';
 
-import MENU_ITEMS from './MenuItems.constants';
 
 const App = () => (
   <div>
@@ -39,7 +36,7 @@ const App = () => (
         { type: 'item', href: '#', content: 'Sign Up' },
       ]}
       username="username"
-      avatar={UserAvatar}
+      avatar={Logo}
       userMenu={[
         {
           type: 'item',
