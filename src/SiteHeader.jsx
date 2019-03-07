@@ -60,7 +60,13 @@ class SiteHeader extends React.Component {
     const userMenuNav = (menuItems => (
       <Menu>
         <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center pl-2 pr-3">
-          <Avatar size="1.5em" src={this.props.avatar} className="mr-2" /> {this.props.username} {caret}
+          <Avatar
+            size="1.5em"
+            src={this.props.avatar}
+            alt=""
+            className="mr-2"
+          />
+          {this.props.username} {caret}
         </MenuTrigger>
         <MenuContent className="dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           {menuItems.map(({ type, href, content }) => (
@@ -127,14 +133,14 @@ class SiteHeader extends React.Component {
 
         if (type === 'item') {
           return (
-            <li key={`${type}-${content}`} className="nav-item">
-              <a className="nav-link" href={href}>{content}</a>
-            </li>
+            <a key={`${type}-${content}`} className="nav-link" href={href}>
+              {content}
+            </a>
           );
         }
 
         return (
-          <Menu key={`${type}-${content}`} tag="li" className="nav-item">
+          <Menu key={`${type}-${content}`} tag="div" className="nav-item">
             <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
               {content}
             </MenuTrigger>
@@ -171,13 +177,20 @@ class SiteHeader extends React.Component {
 
 
     return (
-      <div className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top">
+      <header
+        aria-label="Main"
+        className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
+      >
         <div className="w-100">
           <Menu className="position-static">
-            <MenuTrigger tag="button" className="icon-button">
-              <img src={menuIcon} alt="Menu" />
+            <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu">
+              <img src={menuIcon} alt="" />
             </MenuTrigger>
-            <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
+            <MenuContent
+              tag="nav"
+              aria-label="Main"
+              className="nav flex-column pin-left pin-right border-top shadow py-2"
+            >
               {mainNavItems}
             </MenuContent>
           </Menu>
@@ -188,19 +201,24 @@ class SiteHeader extends React.Component {
             src={this.props.logo}
             alt={this.props.logoAltText}
             href={this.props.logoDestination}
+            itemType="http://schema.org/Organization"
           />
         </div>
         <div className="w-100 d-flex justify-content-end align-items-center">
-          <Menu className="position-static">
-            <MenuTrigger tag="button" className="icon-button">
-              <Avatar size="1.5rem" src={this.props.avatar} />
+          <Menu
+            tag="nav"
+            aria-label="User"
+            className="position-static"
+          >
+            <MenuTrigger tag="button" className="icon-button" aria-label="User Menu">
+              <Avatar size="1.5rem" src={this.props.avatar} alt={this.props.username} />
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
               {this.props.loggedIn ? userNavItems : loggedOutItems}
             </MenuContent>
           </Menu>
         </div>
-      </div>
+      </header>
     );
   }
 
