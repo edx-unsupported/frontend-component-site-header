@@ -24,7 +24,7 @@ class SiteHeader extends React.Component {
   }
 
   renderDesktopNav() {
-    const mainNavItems = ((menuItems) => {
+    const renderMainMenu = (menuItems) => {
       // Nodes are accepted as a prop
       if (!Array.isArray(menuItems)) return menuItems;
 
@@ -38,14 +38,12 @@ class SiteHeader extends React.Component {
 
         if (type === 'item') {
           return (
-            <li key={`${type}-${content}`} className="nav-item">
-              <a className="nav-link" href={href}>{content}</a>
-            </li>
+            <a key={`${type}-${content}`} className="nav-link" href={href}>{content}</a>
           );
         }
 
         return (
-          <Menu key={`${type}-${content}`} tag="li" className="nav-item" respondToPointerEvents>
+          <Menu key={`${type}-${content}`} tag="div" className="nav-item" respondToPointerEvents>
             <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
               {content} {caret}
             </MenuTrigger>
@@ -55,11 +53,15 @@ class SiteHeader extends React.Component {
           </Menu>
         );
       });
-    })(this.props.mainMenu);
+    };
 
-    const userMenuNav = (menuItems => (
-      <Menu>
-        <MenuTrigger tag="button" className="btn btn-light d-inline-flex align-items-center pl-2 pr-3">
+    const renderUserMenu = menuItems => (
+      <Menu tag="ul">
+        <MenuTrigger
+          tag="button"
+          aria-label="Account Menu"
+          className="btn btn-light d-inline-flex align-items-center pl-2 pr-3"
+        >
           <Avatar
             size="1.5em"
             src={this.props.avatar}
@@ -76,9 +78,9 @@ class SiteHeader extends React.Component {
           ))}
         </MenuContent>
       </Menu>
-    ))(this.props.userMenu);
+    );
 
-    const loggedOutItems = ((items => items.map((item, i, arr) => (
+    const renderLoggedOutItems = items => items.map((item, i, arr) => (
       <a
         key={`${item.type}-${item.content}`}
         className={classNames(
@@ -92,7 +94,7 @@ class SiteHeader extends React.Component {
       >
         {item.content}
       </a>
-    ))))(this.props.loggedOutItems);
+    ));
 
     return (
       <header className="site-header-desktop">
@@ -105,12 +107,19 @@ class SiteHeader extends React.Component {
               href={this.props.logoDestination}
             />
             <div className="d-flex flex-grow-1 flex-column-reverse">
-              <ul className="nav main-nav">
-                {mainNavItems}
-              </ul>
-              <div className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center">
-                {this.props.loggedIn ? userMenuNav : loggedOutItems}
-              </div>
+              <nav aria-label="Main" className="nav main-nav">
+                {renderMainMenu(this.props.mainMenu)}
+              </nav>
+              <nav
+                aria-label="Secondary"
+                className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center"
+              >
+                {
+                  this.props.loggedIn ?
+                    renderUserMenu(this.props.userMenu) :
+                    renderLoggedOutItems(this.props.loggedOutItems)
+                }
+              </nav>
             </div>
           </div>
         </div>
@@ -119,7 +128,7 @@ class SiteHeader extends React.Component {
   }
 
   renderMobileNav() {
-    const mainNavItems = ((menuItems) => {
+    const renderMainMenu = (menuItems) => {
       // Nodes are accepted as a prop
       if (!Array.isArray(menuItems)) return menuItems;
 
@@ -150,15 +159,15 @@ class SiteHeader extends React.Component {
           </Menu>
         );
       });
-    })(this.props.mainMenu);
+    };
 
-    const userNavItems = (menuItems => menuItems.map(({ type, href, content }) => (
+    const renderUserMenu = menuItems => menuItems.map(({ type, href, content }) => (
       <li className="nav-item" key={`${type}-${content}`}>
         <a className="nav-link" href={href}>{content}</a>
       </li>
-    )))(this.props.userMenu);
+    ));
 
-    const loggedOutItems = (items => items.map(({ type, href, content }, i, arr) => (
+    const renderLoggedOutItems = items => items.map(({ type, href, content }, i, arr) => (
       <li className="nav-item px-3 my-2" key={`${type}-${content}`}>
         <a
           className={classNames(
@@ -173,7 +182,7 @@ class SiteHeader extends React.Component {
           {content}
         </a>
       </li>
-    )))(this.props.loggedOutItems);
+    ));
 
 
     return (
@@ -191,7 +200,7 @@ class SiteHeader extends React.Component {
               aria-label="Main"
               className="nav flex-column pin-left pin-right border-top shadow py-2"
             >
-              {mainNavItems}
+              {renderMainMenu(this.props.mainMenu)}
             </MenuContent>
           </Menu>
         </div>
@@ -207,14 +216,18 @@ class SiteHeader extends React.Component {
         <div className="w-100 d-flex justify-content-end align-items-center">
           <Menu
             tag="nav"
-            aria-label="User"
+            aria-label="Account"
             className="position-static"
           >
-            <MenuTrigger tag="button" className="icon-button" aria-label="User Menu">
+            <MenuTrigger tag="button" className="icon-button" aria-label="Account Menu">
               <Avatar size="1.5rem" src={this.props.avatar} alt={this.props.username} />
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
-              {this.props.loggedIn ? userNavItems : loggedOutItems}
+              {
+                this.props.loggedIn ?
+                  renderUserMenu(this.props.userMenu) :
+                  renderLoggedOutItems(this.props.loggedOutItems)
+              }
             </MenuContent>
           </Menu>
         </div>
