@@ -38,7 +38,7 @@ class DesktopHeader extends React.Component {
       return (
         <Menu key={`${type}-${content}`} tag="div" className="nav-item" respondToPointerEvents>
           <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
-            {content} <CaretIcon />
+            {content} <CaretIcon role="img" aria-hidden focusable="false" />
           </MenuTrigger>
           <MenuContent className="pin-left pin-right shadow py-2">
             {submenuContent}
@@ -55,13 +55,13 @@ class DesktopHeader extends React.Component {
       <Menu>
         <MenuTrigger
           tag="button"
-          aria-label="Account Menu"
+          aria-label={`Account menu for ${username}`}
           className="btn btn-light d-inline-flex align-items-center pl-2 pr-3"
         >
           <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
-          {username} <CaretIcon />
+          {username} <CaretIcon role="img" aria-hidden focusable="false" />
         </MenuTrigger>
-        <MenuContent className="dropdown-menu show dropdown-menu-right pin-right shadow py-2">
+        <MenuContent tag="ul" className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           {userMenu.map(({ type, href, content }) => (
             <li className={`dropdown-${type}`} key={`${type}-${content}`}>
               <a href={href}>{content}</a>

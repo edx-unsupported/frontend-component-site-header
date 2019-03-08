@@ -24,6 +24,11 @@ $white: #fff;
   }
 }
 
+.site-header-mobile,
+.site-header-desktop {
+  position: relative;
+  z-index: 1000;
+}
 
 .site-header-mobile {
   .nav-link {

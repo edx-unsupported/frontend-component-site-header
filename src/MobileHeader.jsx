@@ -39,7 +39,7 @@ class MobileHeader extends React.Component {
 
       return (
         <Menu key={`${type}-${content}`} tag="div" className="nav-item">
-          <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
+          <MenuTrigger tag="button" className="nav-link text-left btn-link d-inline-flex align-items-center">
             {content}
           </MenuTrigger>
           <MenuContent className="position-static pin-left pin-right py-2">
@@ -89,6 +89,7 @@ class MobileHeader extends React.Component {
       loggedIn,
       avatar,
       username,
+      stickyOnMobile,
     } = this.props;
 
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
@@ -96,12 +97,17 @@ class MobileHeader extends React.Component {
     return (
       <header
         aria-label="Main"
-        className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
+        className={classNames(
+          'site-header-mobile d-flex justify-content-between align-items-center shadow',
+          {
+            'sticky-top': stickyOnMobile,
+          },
+        )}
       >
         <div className="w-100">
           <Menu className="position-static">
-            <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu">
-              <MenuIcon role="img" alt="" />
+            <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu" title="Main Menu">
+              <MenuIcon role="img" aria-hidden focusable="false" width="1.5rem" height="1.5rem" />
             </MenuTrigger>
             <MenuContent
               tag="nav"
@@ -117,7 +123,7 @@ class MobileHeader extends React.Component {
         </div>
         <div className="w-100 d-flex justify-content-end align-items-center">
           <Menu tag="nav" aria-label="Account" className="position-static">
-            <MenuTrigger tag="button" className="icon-button" aria-label="Account Menu">
+            <MenuTrigger tag="button" className="icon-button" aria-label="Account Menu" title="Account Menu">
               <Avatar size="1.5rem" src={avatar} alt={username} />
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
@@ -152,6 +158,7 @@ MobileHeader.propTypes = {
   avatar: PropTypes.string,
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
+  stickyOnMobile: PropTypes.bool,
 };
 
 MobileHeader.defaultProps = {
@@ -164,6 +171,7 @@ MobileHeader.defaultProps = {
   avatar: null,
   username: null,
   loggedIn: false,
+  stickyOnMobile: true,
 };
 
 export default MobileHeader;
