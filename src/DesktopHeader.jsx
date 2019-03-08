@@ -52,7 +52,7 @@ class DesktopHeader extends React.Component {
     const { userMenu, avatar, username } = this.props;
 
     return (
-      <Menu tag="ul" className="mb-0">
+      <Menu>
         <MenuTrigger
           tag="button"
           aria-label="Account Menu"
