@@ -56,7 +56,7 @@ class SiteHeader extends React.Component {
     };
 
     const renderUserMenu = menuItems => (
-      <Menu tag="ul">
+      <Menu tag="ul" className="mb-0">
         <MenuTrigger
           tag="button"
           aria-label="Account Menu"
