@@ -80,7 +80,7 @@ class App extends React.Component {
             { type: 'item', href: '#', content: 'Sign Up' },
           ]}
         />
-        <div className="py-5">
+        <main className="py-5">
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -89,7 +89,7 @@ class App extends React.Component {
           >
             Toggle Logged In state
           </button>
-        </div>
+        </main>
       </div>
     );
   }
