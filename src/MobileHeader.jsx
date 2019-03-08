@@ -8,7 +8,7 @@ import Avatar from './Avatar';
 import { LinkedLogo } from './Logo';
 
 // Assets
-import menuIcon from './assets/menu.svg';
+import { ReactComponent as MenuIcon } from './assets/menu.svg';
 
 class MobileHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -101,7 +101,7 @@ class MobileHeader extends React.Component {
         <div className="w-100">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu">
-              <img src={menuIcon} alt="" />
+              <MenuIcon role="img" alt="" />
             </MenuTrigger>
             <MenuContent
               tag="nav"

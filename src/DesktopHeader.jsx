@@ -8,12 +8,7 @@ import Avatar from './Avatar';
 import { LinkedLogo } from './Logo';
 
 // Assets
-const caret = (
-  <svg width="16px" height="16px" viewBox="0 0 16 16" className="ml-1 mr-n1">
-    <path d="M7,4 L7,8 L11,8 L11,10 L5,10 L5,4 L7,4 Z" fill="currentColor" transform="translate(8.000000, 7.000000) rotate(-45.000000) translate(-8.000000, -7.000000) " />
-  </svg>
-);
-
+import { ReactComponent as CaretIcon } from './assets/caret.svg';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -43,7 +38,7 @@ class DesktopHeader extends React.Component {
       return (
         <Menu key={`${type}-${content}`} tag="div" className="nav-item" respondToPointerEvents>
           <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
-            {content} {caret}
+            {content} <CaretIcon />
           </MenuTrigger>
           <MenuContent className="pin-left pin-right shadow py-2">
             {submenuContent}
@@ -64,7 +59,7 @@ class DesktopHeader extends React.Component {
           className="btn btn-light d-inline-flex align-items-center pl-2 pr-3"
         >
           <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
-          {username} {caret}
+          {username} <CaretIcon />
         </MenuTrigger>
         <MenuContent className="dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           {userMenu.map(({ type, href, content }) => (
