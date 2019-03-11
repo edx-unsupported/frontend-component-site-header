@@ -90,8 +90,8 @@ class DesktopHeader extends React.Component {
         className={classNames(
           'btn mr-2',
           {
-            'btn-outline-primary': i < arr.length - 1,
-            'btn-primary': i === arr.length - 1,
+            'btn-link': i < arr.length - 1,
+            'btn-outline-primary': i === arr.length - 1,
           },
         )}
         href={item.href}
@@ -116,16 +116,19 @@ class DesktopHeader extends React.Component {
       <header className="site-header-desktop">
         <div className="container-fluid">
           <div className="nav-container position-relative d-flex align-items-center">
-            <LinkedLogo className="logo mr-2" {...logoProps} />
-            <div className="d-flex flex-grow-1 flex-column-reverse">
-              <nav aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="nav main-nav">{this.renderMainMenu()}</nav>
-              <nav
-                aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
-                className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center"
-              >
-                {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
-              </nav>
-            </div>
+            <LinkedLogo className="logo" {...logoProps} />
+            <nav
+              aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+              className="nav main-nav"
+            >
+              {this.renderMainMenu()}
+            </nav>
+            <nav
+              aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+              className="nav secondary-menu-container align-items-center ml-auto"
+            >
+              {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
+            </nav>
           </div>
         </div>
       </header>
