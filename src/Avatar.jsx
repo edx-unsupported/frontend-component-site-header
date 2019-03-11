@@ -14,7 +14,7 @@ function Avatar({
   const avatar = src ? (
     <img className="d-block w-100 h-100" src={src} alt={alt} />
   ) : (
-    <DefaultAvatar />
+    <DefaultAvatar className="text-muted" width={size} height={size} role="img" aria-hidden focusable="false" />
   );
 
   return (

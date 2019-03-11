@@ -107,21 +107,22 @@ class Menu extends React.Component {
         break;
       }
       case 'Tab': {
-        // Trap focus
-        const focusableElements = Array.from(this.getFocusableElements());
-        const indexOfActiveElement = focusableElements.indexOf(document.activeElement);
-
-        if (indexOfActiveElement === focusableElements.length - 1 && !e.shiftKey) {
-          // last. cycle forward
-          e.preventDefault();
-          focusableElements[0].focus();
+        e.preventDefault();
+        if (e.shiftKey) {
+          this.focusPrevious();
+        } else {
+          this.focusNext();
         }
-
-        if (indexOfActiveElement === 0 && e.shiftKey) {
-          // first. cycle backward
-          e.preventDefault();
-          focusableElements[focusableElements.length - 1].focus();
-        }
+        break;
+      }
+      case 'ArrowDown': {
+        e.preventDefault();
+        this.focusNext();
+        break;
+      }
+      case 'ArrowUp': {
+        e.preventDefault();
+        this.focusPrevious();
         break;
       }
       default:
@@ -130,13 +131,11 @@ class Menu extends React.Component {
 
   onMouseEnter() {
     if (!this.props.respondToPointerEvents) return;
-
     this.open();
   }
 
   onMouseLeave() {
     if (!this.props.respondToPointerEvents) return;
-
     this.close();
   }
 
@@ -156,6 +155,20 @@ class Menu extends React.Component {
         attributes[property] = this.props[property];
       });
     return attributes;
+  }
+
+  focusNext() {
+    const focusableElements = Array.from(this.getFocusableElements());
+    const activeIndex = focusableElements.indexOf(document.activeElement);
+    const nextIndex = (activeIndex + 1) % focusableElements.length;
+    focusableElements[nextIndex].focus();
+  }
+
+  focusPrevious() {
+    const focusableElements = Array.from(this.getFocusableElements());
+    const activeIndex = focusableElements.indexOf(document.activeElement);
+    const previousIndex = (activeIndex || focusableElements.length) - 1;
+    focusableElements[previousIndex].focus();
   }
 
   open() {
@@ -181,6 +194,7 @@ class Menu extends React.Component {
   renderTrigger(node) {
     return React.cloneElement(node, {
       onClick: this.onTriggerClick,
+      'aria-haspopup': true,
       'aria-expanded': this.state.expanded,
     });
   }
