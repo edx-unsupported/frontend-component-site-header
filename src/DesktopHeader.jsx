@@ -53,6 +53,7 @@ class DesktopHeader extends React.Component {
 
     return (
       <Menu>
+        {/* TODO: i18n for label */}
         <MenuTrigger
           tag="button"
           aria-label={`Account menu for ${username}`}
@@ -104,6 +105,11 @@ class DesktopHeader extends React.Component {
 
     return (
       <header className="site-header-desktop">
+        {/*
+          TODO: i18n for labels throughout this JSX:
+            - Main
+            - Secondary
+        */}
         <div className="container-fluid">
           <div className="nav-container position-relative d-flex align-items-center">
             <LinkedLogo className="logo mr-2" {...logoProps} />

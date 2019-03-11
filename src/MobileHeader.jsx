@@ -104,6 +104,13 @@ class MobileHeader extends React.Component {
           },
         )}
       >
+        {/*
+          TODO: i18n for labels throughout this JSX:
+            - Main Menu
+            - Main
+            - Account
+            - Account Menu
+        */}
         <div className="w-100">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu" title="Main Menu">
