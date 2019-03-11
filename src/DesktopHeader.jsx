@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { injectIntl, intlShape } from 'react-intl';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
 import Avatar from './Avatar';
 import { LinkedLogo } from './Logo';
+
+// i18n
+import messages from './messages';
 
 // Assets
 import { ReactComponent as CaretIcon } from './assets/caret.svg';
@@ -49,14 +53,19 @@ class DesktopHeader extends React.Component {
   }
 
   renderUserMenu() {
-    const { userMenu, avatar, username } = this.props;
+    const {
+      userMenu,
+      avatar,
+      username,
+      intl,
+    } = this.props;
 
     return (
       <Menu>
         {/* TODO: i18n for label */}
         <MenuTrigger
           tag="button"
-          aria-label={`Account menu for ${username}`}
+          aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
           className="btn btn-light d-inline-flex align-items-center pl-2 pr-3"
         >
           <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
@@ -99,6 +108,7 @@ class DesktopHeader extends React.Component {
       logoAltText,
       logoDestination,
       loggedIn,
+      intl,
     } = this.props;
 
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
@@ -116,7 +126,7 @@ class DesktopHeader extends React.Component {
             <div className="d-flex flex-grow-1 flex-column-reverse">
               <nav aria-label="Main" className="nav main-nav">{this.renderMainMenu()}</nav>
               <nav
-                aria-label="Secondary"
+                aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
                 className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center"
               >
                 {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
@@ -151,6 +161,9 @@ DesktopHeader.propTypes = {
   avatar: PropTypes.string,
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
+
+  // i18n
+  intl: intlShape.isRequired,
 };
 
 DesktopHeader.defaultProps = {
@@ -165,4 +178,4 @@ DesktopHeader.defaultProps = {
   loggedIn: false,
 };
 
-export default DesktopHeader;
+export default injectIntl(DesktopHeader);

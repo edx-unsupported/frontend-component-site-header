@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { injectIntl, intlShape } from 'react-intl';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
 import Avatar from './Avatar';
 import { LinkedLogo } from './Logo';
+
+// i18n
+import messages from './messages';
 
 // Assets
 import { ReactComponent as MenuIcon } from './assets/menu.svg';
@@ -90,13 +94,14 @@ class MobileHeader extends React.Component {
       avatar,
       username,
       stickyOnMobile,
+      intl,
     } = this.props;
 
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
 
     return (
       <header
-        aria-label="Main"
+        aria-label={intl.formatMessage(messages['header.label.main.header'])}
         className={classNames(
           'site-header-mobile d-flex justify-content-between align-items-center shadow',
           {
@@ -113,12 +118,17 @@ class MobileHeader extends React.Component {
         */}
         <div className="w-100 d-flex justify-content-start">
           <Menu className="position-static">
-            <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu" title="Main Menu">
+            <MenuTrigger
+              tag="button"
+              className="icon-button"
+              aria-label={intl.formatMessage(messages['header.label.main.menu'])}
+              title={intl.formatMessage(messages['header.label.main.menu'])}
+            >
               <MenuIcon role="img" aria-hidden focusable="false" style={{ width: '1.5rem', height: '1.5rem' }} />
             </MenuTrigger>
             <MenuContent
               tag="nav"
-              aria-label="Main"
+              aria-label={intl.formatMessage(messages['header.label.main.nav'])}
               className="nav flex-column pin-left pin-right border-top shadow py-2"
             >
               {this.renderMainMenu()}
@@ -129,8 +139,13 @@ class MobileHeader extends React.Component {
           <LinkedLogo className="logo" {...logoProps} itemType="http://schema.org/Organization" />
         </div>
         <div className="w-100 d-flex justify-content-end align-items-center">
-          <Menu tag="nav" aria-label="Account" className="position-static">
-            <MenuTrigger tag="button" className="icon-button" aria-label="Account Menu" title="Account Menu">
+          <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.account.nav'])} className="position-static">
+            <MenuTrigger
+              tag="button"
+              className="icon-button"
+              aria-label={intl.formatMessage(messages['header.label.account.menu'])}
+              title={intl.formatMessage(messages['header.label.account.menu'])}
+            >
               <Avatar size="1.5rem" src={avatar} alt={username} />
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
@@ -166,6 +181,9 @@ MobileHeader.propTypes = {
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
   stickyOnMobile: PropTypes.bool,
+
+  // i18n
+  intl: intlShape.isRequired,
 };
 
 MobileHeader.defaultProps = {
@@ -179,6 +197,7 @@ MobileHeader.defaultProps = {
   username: null,
   loggedIn: false,
   stickyOnMobile: true,
+
 };
 
-export default MobileHeader;
+export default injectIntl(MobileHeader);
