@@ -175,6 +175,8 @@ class Menu extends React.Component {
   open() {
     if (this.props.onOpen) this.props.onOpen();
     this.setState({ expanded: true });
+    // Listen to touchend and click events to ensure the menu
+    // can be closed on mobile, pointer, and mixed input devices
     document.addEventListener('touchend', this.onDocumentClick, true);
     document.addEventListener('click', this.onDocumentClick, true);
   }
