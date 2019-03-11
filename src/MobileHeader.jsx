@@ -39,7 +39,7 @@ class MobileHeader extends React.Component {
 
       return (
         <Menu key={`${type}-${content}`} tag="div" className="nav-item">
-          <MenuTrigger tag="button" className="nav-link text-left btn-link d-inline-flex align-items-center">
+          <MenuTrigger tag="a" role="button" tabIndex="0" className="nav-link">
             {content}
           </MenuTrigger>
           <MenuContent className="position-static pin-left pin-right py-2">
@@ -111,7 +111,6 @@ class MobileHeader extends React.Component {
             - Account
             - Account Menu
         */}
-        <div className="w-100">
         <div className="w-100 d-flex justify-content-start">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu" title="Main Menu">
