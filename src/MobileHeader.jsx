@@ -112,6 +112,7 @@ class MobileHeader extends React.Component {
             - Account Menu
         */}
         <div className="w-100">
+        <div className="w-100 d-flex justify-content-start">
           <Menu className="position-static">
             <MenuTrigger tag="button" className="icon-button" aria-label="Main Menu" title="Main Menu">
               <MenuIcon role="img" aria-hidden focusable="false" style={{ width: '1.5rem', height: '1.5rem' }} />
