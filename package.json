@@ -26,6 +26,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
+    "react-intl": "^2.8.0",
     "react-responsive": "^6.1.1",
     "react-transition-group": "^2.5.2"
   },
