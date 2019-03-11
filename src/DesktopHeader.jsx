@@ -9,7 +9,7 @@ import Avatar from './Avatar';
 import { LinkedLogo } from './Logo';
 
 // i18n
-import messages from './messages';
+import messages from './SiteHeader.messages';
 
 // Assets
 import { ReactComponent as CaretIcon } from './assets/caret.svg';
