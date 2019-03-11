@@ -62,7 +62,6 @@ class DesktopHeader extends React.Component {
 
     return (
       <Menu>
-        {/* TODO: i18n for label */}
         <MenuTrigger
           tag="button"
           aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
@@ -115,16 +114,11 @@ class DesktopHeader extends React.Component {
 
     return (
       <header className="site-header-desktop">
-        {/*
-          TODO: i18n for labels throughout this JSX:
-            - Main
-            - Secondary
-        */}
         <div className="container-fluid">
           <div className="nav-container position-relative d-flex align-items-center">
             <LinkedLogo className="logo mr-2" {...logoProps} />
             <div className="d-flex flex-grow-1 flex-column-reverse">
-              <nav aria-label="Main" className="nav main-nav">{this.renderMainMenu()}</nav>
+              <nav aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="nav main-nav">{this.renderMainMenu()}</nav>
               <nav
                 aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
                 className="nav secondary-menu-container mb-3 mt-3 align-self-end align-items-center"
