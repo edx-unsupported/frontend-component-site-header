@@ -257,7 +257,7 @@ Menu.defaultProps = {
   onOpen: null,
   respondToPointerEvents: false,
   closeOnDocumentClick: true,
-  transitionTimeout: 0,
+  transitionTimeout: 250,
   transitionClassName: 'menu-content',
 };
 
