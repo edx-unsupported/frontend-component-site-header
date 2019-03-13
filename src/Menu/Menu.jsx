@@ -1,12 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
 
 function MenuTrigger({ tag, className, ...attributes }) {
   return React.createElement(tag, {
-    className: classNames('menu-trigger', className),
+    className: `menu-trigger ${className}`,
     ...attributes,
   });
 }
@@ -22,7 +21,7 @@ MenuTrigger.defaultProps = {
 
 function MenuContent({ tag, className, ...attributes }) {
   return React.createElement(tag, {
-    className: classNames('menu-content', className),
+    className: ['menu-content', className].join(' '),
     ...attributes,
   });
 }
@@ -218,6 +217,8 @@ class Menu extends React.Component {
   }
 
   render() {
+    const { className } = this.props;
+
     const wrappedChildren = React.Children.map(this.props.children, (child) => {
       if (child.type === MenuTrigger) {
         return this.renderTrigger(child);
@@ -225,10 +226,10 @@ class Menu extends React.Component {
       return this.renderMenuContent(child);
     });
 
+    const rootClassName = this.state.expanded ? 'menu expanded' : 'menu';
+
     return React.createElement(this.props.tag, {
-      className: classNames('menu', this.props.className, {
-        expanded: this.state.expanded,
-      }),
+      className: `${rootClassName} ${className}`,
       ref: this.menu,
       onKeyDown: this.onKeyDown,
       onMouseEnter: this.onMouseEnter,
