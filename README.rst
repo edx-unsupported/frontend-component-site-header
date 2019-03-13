@@ -1,12 +1,11 @@
-===== 
-Frontend Component: Site Header 
-===== 
+=====
+Frontend Component: Site Header
+=====
 
 |Build Status| |Coveralls| |npm_version| |npm_downloads| |license|
 |semantic-release|
 
-A reusable react site header component for edX.org
-
+A reusable React site header component for edX.org.
 
 Usage
 --------
@@ -14,86 +13,11 @@ Install the component in your project:
 
 ``npm i --save @edx/frontend-component-site-header``
 
-
-In your code:
-
-.. code-block:: javascript
-
-  import { SiteHeader } from "@edx/frontend-component-site-header";
-  
-  // ...code...
-
-  render() {
-    return(
-      <SiteHeader
-        logo={Logo}
-        logoDestination="https://edx.org"
-        logoAltText="edX"
-        mainMenu={[
-          {
-            type: 'menu',
-            href: '#',
-            content: 'Courses',
-            submenuContent: (
-              <div>
-                <a href="#">link 1 </a>
-                <a href="#">link 1 </a>
-              </div>
-            )
-          },
-          {
-            type: 'item',
-            href: '#',
-            content: 'Programs',
-          },
-          {
-            type: 'item',
-            href: '#',
-            content: 'Schools & Partners',
-          },
-        ]}
-        loggedIn={this.state.loggedIn}
-        username={this.state.loggedIn ? 'username' : null}
-        avatar={this.state.loggedIn ? Logo : null}
-        userMenu={[
-          {
-            type: 'item',
-            href: '#',
-            content: 'Dashboard',
-          },
-          {
-            type: 'item',
-            href: '#',
-            content: 'Profile',
-          },
-          {
-            type: 'item',
-            href: '#',
-            content: 'Account Settings',
-          },
-          {
-            type: 'item',
-            href: '#',
-            content: 'Help',
-          },
-          {
-            type: 'item',
-            href: '#',
-            content: 'Logout',
-          },
-        ]}
-        loggedOutItems={[
-          { type: 'item', href: '#', content: 'Login' },
-          { type: 'item', href: '#', content: 'Sign Up' },
-        ]}
-      />
-    )
-  }
-
+The component expects to have react-intl provided as a peer dependency, and to be wrapped inside an IntlProvider element, whether or not your consuming application is actually localized.  For a basic default locale (English) version, you can use the IntlProvider element with no props, as in the sample application in src/index.jsx .
 
 Development
--------- 
-To run this component from the example app, clone this repo, 
+--------
+To run this component from the example app, clone this repo,
 run ``npm install``, and then run ``npm start``.
 
 
