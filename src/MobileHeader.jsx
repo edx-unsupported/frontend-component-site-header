@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 
 // Local Components
@@ -70,13 +69,7 @@ class MobileHeader extends React.Component {
     return loggedOutItems.map(({ type, href, content }, i, arr) => (
       <li className="nav-item px-3 my-2" key={`${type}-${content}`}>
         <a
-          className={classNames(
-            'btn btn-block',
-            {
-              'btn-outline-primary': i < arr.length - 1,
-              'btn-primary': i === arr.length - 1,
-            },
-          )}
+          className={i < arr.length - 1 ? 'btn btn-block btn-outline-primary' : 'btn btn-block btn-primary'}
           href={href}
         >
           {content}
@@ -96,18 +89,13 @@ class MobileHeader extends React.Component {
       stickyOnMobile,
       intl,
     } = this.props;
-
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
+    const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
 
     return (
       <header
         aria-label={intl.formatMessage(messages['header.label.main.header'])}
-        className={classNames(
-          'site-header-mobile d-flex justify-content-between align-items-center shadow',
-          {
-            'sticky-top': stickyOnMobile,
-          },
-        )}
+        className={`site-header-mobile d-flex justify-content-between align-items-center shadow ${stickyClassName}`}
       >
         <div className="w-100 d-flex justify-content-start">
           <Menu className="position-static">

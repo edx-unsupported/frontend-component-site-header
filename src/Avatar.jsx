@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { ReactComponent as DefaultAvatar } from './assets/avatar.svg';
@@ -20,7 +19,7 @@ function Avatar({
   return (
     <span
       style={{ height: size, width: size }}
-      className={classNames('avatar overflow-hidden d-inline-flex rounded-circle', className)}
+      className={`avatar overflow-hidden d-inline-flex rounded-circle ${className}`}
     >
       {avatar}
     </span>
