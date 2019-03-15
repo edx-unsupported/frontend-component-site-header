@@ -69,11 +69,9 @@ class DesktopHeader extends React.Component {
           <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
           {username} <CaretIcon role="img" aria-hidden focusable="false" />
         </MenuTrigger>
-        <MenuContent tag="ul" className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
+        <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           {userMenu.map(({ type, href, content }) => (
-            <li className={`dropdown-${type}`} key={`${type}-${content}`}>
-              <a href={href}>{content}</a>
-            </li>
+            <a className={`dropdown-${type}`} key={`${type}-${content}`} href={href}>{content}</a>
           ))}
         </MenuContent>
       </Menu>
