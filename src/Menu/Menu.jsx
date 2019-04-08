@@ -17,6 +17,7 @@ MenuTrigger.defaultProps = {
   tag: 'div',
   className: null,
 };
+const MenuTriggerType = <MenuTrigger />.type;
 
 
 function MenuContent({ tag, className, ...attributes }) {
@@ -220,7 +221,7 @@ class Menu extends React.Component {
     const { className } = this.props;
 
     const wrappedChildren = React.Children.map(this.props.children, (child) => {
-      if (child.type === MenuTrigger) {
+      if (child.type === MenuTriggerType) {
         return this.renderTrigger(child);
       }
       return this.renderMenuContent(child);
