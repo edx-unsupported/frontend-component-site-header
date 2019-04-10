@@ -10,6 +10,7 @@ module.exports = Merge.smart(commonConfig, {
     filename: 'main.js',
     library: 'frontend-component-site-header',
     libraryTarget: 'umd',
+    globalObject: 'typeof self !== \'undefined\' ? self : this',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
