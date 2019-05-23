@@ -28,26 +28,24 @@
     "react-transition-group": "^2.5.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-angular": "^6.0.2",
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
     "@edx/edx-bootstrap": "git://github.com/edx/edx-bootstrap.git#update-with-documentation-site",
     "@svgr/webpack": "^4.1.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-rewire": "^1.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^4.2.1",
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
     "coveralls": "^3.0.0",
     "css-loader": "^2.1.0",
-    "enzyme": "^3.3.0",
+    "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-edx": "^4.0.4",
     "eslint-plugin-jsx-a11y": "^6.1.2",
@@ -55,7 +53,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.14.3",
-    "jest": "23.6.0",
+    "jest": "^24.8.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
@@ -79,6 +77,9 @@
     "react-intl": "^2.8.0"
   },
   "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
     "setupFiles": [
       "./src/tests/setupTest.js"
     ],
@@ -90,6 +91,7 @@
       "!*.test.*"
     ],
     "moduleNameMapper": {
+      "\\.svg": "<rootDir>/__mocks__/svgrMock.js",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "identity-obj-proxy"
     }

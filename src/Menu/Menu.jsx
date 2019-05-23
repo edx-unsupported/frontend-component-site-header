@@ -199,7 +199,7 @@ class Menu extends React.Component {
   renderTrigger(node) {
     return React.cloneElement(node, {
       onClick: this.onTriggerClick,
-      'aria-haspopup': true,
+      'aria-haspopup': 'menu',
       'aria-expanded': this.state.expanded,
     });
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
+import Responsive from 'react-responsive';
 
 // Components
 import DesktopHeader from './DesktopHeader';
@@ -9,12 +9,12 @@ import MobileHeader from './MobileHeader';
 function SiteHeader(props) {
   return (
     <React.Fragment>
-      <MediaQuery query="(max-width: 768px)">
+      <Responsive maxWidth={768}>
         <MobileHeader {...props} />
-      </MediaQuery>
-      <MediaQuery query="(min-width: 769px)">
+      </Responsive>
+      <Responsive minWidth={769}>
         <DesktopHeader {...props} />
-      </MediaQuery>
+      </Responsive>
     </React.Fragment>
   );
 }
