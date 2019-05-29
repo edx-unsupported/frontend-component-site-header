@@ -120,7 +120,7 @@ class MobileHeader extends React.Component {
           <LinkedLogo className="logo" {...logoProps} itemType="http://schema.org/Organization" />
         </div>
         <div className="w-100 d-flex justify-content-end align-items-center">
-          <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.account.nav'])} className="position-static">
+          <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
             <MenuTrigger
               tag="button"
               className="icon-button"

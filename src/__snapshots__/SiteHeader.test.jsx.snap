@@ -21,7 +21,7 @@ exports[`<SiteHeader /> renders correctly for desktop 1`] = `
         />
       </a>
       <nav
-        aria-label="Secondary"
+        aria-label="Main"
         className="nav main-nav"
       >
         <div
@@ -136,7 +136,7 @@ exports[`<SiteHeader /> renders correctly for mobile 1`] = `
     className="w-100 d-flex justify-content-end align-items-center"
   >
     <nav
-      aria-label="Account"
+      aria-label="Secondary"
       className="menu position-static"
       onKeyDown={[Function]}
       onMouseEnter={[Function]}
