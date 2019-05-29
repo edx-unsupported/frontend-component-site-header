@@ -32,7 +32,7 @@ const messages = defineMessages({
     description: 'The aria label for the main header',
   },
   'header.label.secondary.nav': {
-    id: 'header.label.main.nav',
+    id: 'header.label.secondary.nav',
     defaultMessage: 'Secondary',
     description: 'The aria label for the seconary nav',
   },

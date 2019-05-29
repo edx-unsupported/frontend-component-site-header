@@ -109,7 +109,7 @@ class DesktopHeader extends React.Component {
           <div className="nav-container position-relative d-flex align-items-center">
             <LinkedLogo className="logo" {...logoProps} />
             <nav
-              aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+              aria-label={intl.formatMessage(messages['header.label.main.nav'])}
               className="nav main-nav"
             >
               {this.renderMainMenu()}
