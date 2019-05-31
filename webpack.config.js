@@ -38,6 +38,14 @@ module.exports = Merge.smart(commonConfig, {
       amd: 'PropTypes',
       root: 'PropTypes',
     },
+    '@edx/frontend-i18n': {
+      commonjs: '@edx/frontend-i18n',
+      commonjs2: '@edx/frontend-i18n',
+    },
+    '@edx/frontend-logging': {
+      commonjs: '@edx/frontend-logging',
+      commonjs2: '@edx/frontend-logging',
+    },
   },
   plugins: [
     // Cleans the dist directory before each build
