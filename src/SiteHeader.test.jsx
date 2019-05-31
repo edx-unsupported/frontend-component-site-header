@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from '@edx/frontend-i18n';
 import TestRenderer from 'react-test-renderer';
 
 import './__mocks__/reactResponsive.mock';

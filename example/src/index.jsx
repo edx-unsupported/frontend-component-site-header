@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from '@edx/frontend-i18n';
 import SiteHeader from '../../src/index';
 
 import './index.scss';

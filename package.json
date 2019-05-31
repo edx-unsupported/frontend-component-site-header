@@ -37,6 +37,8 @@
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
     "@edx/edx-bootstrap": "^2.2.1",
+    "@edx/frontend-i18n": "^1.0.4",
+    "@edx/frontend-logging": "^2.0.3",
     "@svgr/webpack": "^4.1.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
@@ -59,7 +61,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-intl": "^2.8.0",
     "react-test-renderer": "^16.6.0",
     "sass-loader": "^7.1.0",
     "semantic-release": "^15.1.7",
@@ -71,6 +72,8 @@
     "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
+    "@edx/frontend-i18n": "^1.0.4",
+    "@edx/frontend-logging": "^2.0.3",
     "@edx/paragon": "^3.8.0",
     "prop-types": "^15.5.10",
     "react": "^16.4.2",

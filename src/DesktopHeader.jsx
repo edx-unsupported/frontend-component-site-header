@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '@edx/frontend-i18n';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
