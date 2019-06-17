@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from '@edx/frontend-i18n';
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
 import Avatar from './Avatar';
-import { LinkedLogo } from './Logo';
+import { LinkedLogo, Logo } from './Logo';
 
 // i18n
 import messages from './SiteHeader.messages';
@@ -107,7 +107,7 @@ class DesktopHeader extends React.Component {
       <header className="site-header-desktop">
         <div className="container-fluid">
           <div className="nav-container position-relative d-flex align-items-center">
-            <LinkedLogo className="logo" {...logoProps} />
+            { logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} />}
             <nav
               aria-label={intl.formatMessage(messages['header.label.main.nav'])}
               className="nav main-nav"
