@@ -4,31 +4,13 @@ $white: #fff;
 
 @import './Menu/menu.scss';
 
-.dropdown-item a {
-  text-decoration: none;
-}
-
-.icon-button {
-  display: inline-flex;
-  line-height: 3rem;
-  background: transparent;
-  vertical-align: middle;
-  text-align: center;
-  border: none;
-  height: 3rem;
-  width: 3rem;
-  padding: .75rem;
-  justify-content: center;
-  align-items:center;
-  &:hover, &:focus {
-    background: rgba(0,0,0,.1);
-  }
-}
-
 .site-header-mobile,
 .site-header-desktop {
   position: relative;
   z-index: 1000;
+  .dropdown-item a {
+    text-decoration: none;
+  }
 }
 
 .site-header-mobile {
@@ -39,8 +21,25 @@ $white: #fff;
   img {
     height: 1.5rem;
   }
-}
-
+  .icon-button {
+    display: inline-flex;
+    line-height: 3rem;
+    background: transparent;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    height: 3rem;
+    width: 3rem;
+    padding: .75rem;
+    justify-content: center;
+    align-items:center;
+    &:hover, &:focus {
+      background: rgba(0,0,0,.1);
+    }
+  }
+  .menu-content > a {
+    padding: 0 1rem;
+  }
 
 .site-header-desktop {
   height: 3.75rem;

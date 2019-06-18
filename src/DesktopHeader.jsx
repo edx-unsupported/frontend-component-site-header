@@ -100,6 +100,7 @@ class DesktopHeader extends React.Component {
       loggedIn,
       intl,
     } = this.props;
+
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
 
     return (

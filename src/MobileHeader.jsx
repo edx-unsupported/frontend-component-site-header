@@ -90,7 +90,9 @@ class MobileHeader extends React.Component {
       intl,
       mainMenu,
     } = this.props;
+
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
+
     const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
 
     return (
