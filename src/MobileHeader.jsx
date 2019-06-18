@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from '@edx/frontend-i18n';
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
 import Avatar from './Avatar';
-import { LinkedLogo } from './Logo';
+import { LinkedLogo, Logo } from './Logo';
 
 // i18n
 import messages from './SiteHeader.messages';
@@ -88,6 +88,7 @@ class MobileHeader extends React.Component {
       username,
       stickyOnMobile,
       intl,
+      mainMenu,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
     const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
@@ -98,26 +99,27 @@ class MobileHeader extends React.Component {
         className={`site-header-mobile d-flex justify-content-between align-items-center shadow ${stickyClassName}`}
       >
         <div className="w-100 d-flex justify-content-start">
-          <Menu className="position-static">
-            <MenuTrigger
-              tag="button"
-              className="icon-button"
-              aria-label={intl.formatMessage(messages['header.label.main.menu'])}
-              title={intl.formatMessage(messages['header.label.main.menu'])}
-            >
-              <MenuIcon role="img" aria-hidden focusable="false" style={{ width: '1.5rem', height: '1.5rem' }} />
-            </MenuTrigger>
-            <MenuContent
-              tag="nav"
-              aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-              className="nav flex-column pin-left pin-right border-top shadow py-2"
-            >
-              {this.renderMainMenu()}
-            </MenuContent>
-          </Menu>
+          {mainMenu.length > 0 ?
+            <Menu className="position-static">
+              <MenuTrigger
+                tag="button"
+                className="icon-button"
+                aria-label={intl.formatMessage(messages['header.label.main.menu'])}
+                title={intl.formatMessage(messages['header.label.main.menu'])}
+              >
+                <MenuIcon role="img" aria-hidden focusable="false" style={{ width: '1.5rem', height: '1.5rem' }} />
+              </MenuTrigger>
+              <MenuContent
+                tag="nav"
+                aria-label={intl.formatMessage(messages['header.label.main.nav'])}
+                className="nav flex-column pin-left pin-right border-top shadow py-2"
+              >
+                {this.renderMainMenu()}
+              </MenuContent>
+            </Menu> : null }
         </div>
         <div className="w-100 d-flex justify-content-center">
-          <LinkedLogo className="logo" {...logoProps} itemType="http://schema.org/Organization" />
+          { logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} itemType="http://schema.org/Organization" />}
         </div>
         <div className="w-100 d-flex justify-content-end align-items-center">
           <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">

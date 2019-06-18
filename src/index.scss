@@ -36,15 +36,14 @@ $white: #fff;
     text-decoration: none;
     cursor: pointer;
   }
-  .logo {
-    img {
-      height: 1.5rem;
-    }
+  img {
+    height: 1.5rem;
   }
 }
 
 
 .site-header-desktop {
+  height: 3.75rem;
   box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
   background: $white;
   .nav-link {
@@ -56,7 +55,7 @@ $white: #fff;
     position: relative;
     top: -.05em;
     height: 1.75rem;
-    padding: 0;
+    padding: 1rem 0;
     margin-right: 1rem;
     img {
       display: block;

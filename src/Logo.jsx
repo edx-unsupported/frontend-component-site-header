@@ -32,5 +32,5 @@ LinkedLogo.propTypes = {
   alt: PropTypes.string.isRequired,
 };
 
-export { LinkedLogo };
+export { LinkedLogo, Logo };
 export default Logo;
