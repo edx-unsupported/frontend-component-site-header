@@ -30,11 +30,12 @@ class MobileHeader extends React.Component {
         href,
         content,
         submenuContent,
+        onClick,
       } = menuItem;
 
       if (type === 'item') {
         return (
-          <a key={`${type}-${content}`} className="nav-link" href={href}>
+          <a key={`${type}-${content}`} className="nav-link" href={href} onClick={onClick}>
             {content}
           </a>
         );
@@ -42,7 +43,7 @@ class MobileHeader extends React.Component {
 
       return (
         <Menu key={`${type}-${content}`} tag="div" className="nav-item">
-          <MenuTrigger tag="a" role="button" tabIndex="0" className="nav-link">
+          <MenuTrigger tag="a" role="button" tabIndex="0" className="nav-link" onClick={onClick}>
             {content}
           </MenuTrigger>
           <MenuContent className="position-static pin-left pin-right py-2">

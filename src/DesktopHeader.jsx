@@ -30,17 +30,18 @@ class DesktopHeader extends React.Component {
         href,
         content,
         submenuContent,
+        onClick,
       } = menuItem;
 
       if (type === 'item') {
         return (
-          <a key={`${type}-${content}`} className="nav-link" href={href}>{content}</a>
+          <a key={`${type}-${content}`} className="nav-link" href={href} onClick={onClick}>{content}</a>
         );
       }
 
       return (
         <Menu key={`${type}-${content}`} tag="div" className="nav-item" respondToPointerEvents>
-          <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
+          <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center" href={href} onClick={onClick}>
             {content} <CaretIcon role="img" aria-hidden focusable="false" />
           </MenuTrigger>
           <MenuContent className="pin-left pin-right shadow py-2">
