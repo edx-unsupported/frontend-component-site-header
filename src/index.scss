@@ -90,3 +90,9 @@ $white: #fff;
     border-radius: $rounded-pill;
   }
 }
+
+.skip-nav-link:active, .skip-nav-link:focus {
+  position: relative;
+  z-index: 1010;
+  font-size: 0.875rem;
+}

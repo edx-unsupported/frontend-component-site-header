@@ -21,6 +21,7 @@ class App extends React.Component {
       <IntlProvider>
         <div>
           <SiteHeader
+            skipNavId="content"
             logo={Logo}
             logoDestination="https://edx.org"
             logoAltText="edX"
@@ -82,7 +83,7 @@ class App extends React.Component {
               { type: 'item', href: '#', content: 'Sign Up' },
             ]}
           />
-          <main className="py-5">
+          <main id="content" className="py-5">
             <button
               className="btn btn-primary"
               onClick={() => {
