@@ -112,7 +112,7 @@ class DesktopHeader extends React.Component {
               aria-label={intl.formatMessage(messages['header.label.main.nav'])}
               className="nav main-nav"
             >
-              {this.renderMainMenu()}
+              {process.env.HIDE_HEADER_NAV ? [] : this.renderMainMenu()}
             </nav>
             <nav
               aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
