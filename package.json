@@ -16,7 +16,6 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "start": "webpack-dev-server --config ./webpack.dev.config.js --open --mode development",
-    "is-es5": "es-check es5 ./dist/*.js",
     "lint": "eslint --ext .js --ext .jsx .",
     "test": "jest --coverage",
     "snapshot": "jest --updateSnapshot",
